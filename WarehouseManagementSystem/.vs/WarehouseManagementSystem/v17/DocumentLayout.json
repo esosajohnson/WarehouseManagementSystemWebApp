@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\esosa\\source\\repos\\WarehouseManagementSystem\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|c:\\users\\esosa\\onedrive\\documents\\github\\warehousemanagementsystemwebapp\\warehousemanagementsystem\\warehousemanagementsystem\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|solutionrelative:warehousemanagementsystem\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|c:\\users\\esosa\\onedrive\\documents\\github\\warehousemanagementsystemwebapp\\warehousemanagementsystem\\warehousemanagementsystem\\models\\mainmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|solutionrelative:warehousemanagementsystem\\models\\mainmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|c:\\users\\esosa\\onedrive\\documents\\github\\warehousemanagementsystemwebapp\\warehousemanagementsystem\\warehousemanagementsystem\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|solutionrelative:warehousemanagementsystem\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|c:\\users\\esosa\\onedrive\\documents\\github\\warehousemanagementsystemwebapp\\warehousemanagementsystem\\warehousemanagementsystem\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7CFD64-FF93-400D-BCA0-E137CE6F76B7}|WarehouseManagementSystem\\WarehouseManagementSystem.csproj|solutionrelative:warehousemanagementsystem\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +35,58 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WarehouseManagementSystem\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WarehouseManagementSystem\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T19:55:30.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainModel.cs",
+              "DocumentMoniker": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Models\\MainModel.cs",
+              "RelativeDocumentMoniker": "WarehouseManagementSystem\\Models\\MainModel.cs",
+              "ToolTip": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Models\\MainModel.cs",
+              "RelativeToolTip": "WarehouseManagementSystem\\Models\\MainModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T19:41:00.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "WarehouseManagementSystem\\Models\\Category.cs",
+              "ToolTip": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Models\\Category.cs",
+              "RelativeToolTip": "WarehouseManagementSystem\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T19:40:30.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "WarehouseManagementSystem\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\esosa\\OneDrive\\Documents\\GitHub\\WarehouseManagementSystemWebApp\\WarehouseManagementSystem\\WarehouseManagementSystem\\Models\\Product.cs",
+              "RelativeToolTip": "WarehouseManagementSystem\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T19:40:14.961Z",
+              "EditorCaption": ""
             }
           ]
         }
