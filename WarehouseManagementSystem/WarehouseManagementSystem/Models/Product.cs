@@ -1,28 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace WarehouseManagementSystem.Models
+namespace WarehouseManagementSystem.Models;
+
+public partial class Product
 {
-    public class Product : MainModel
-    {
-        public Guid CategoryId { get; set; }
+    public int ProductId { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-        [Required]
-        public string Description { get; set; }
+    public string Sku { get; set; } = null!;
 
-        [Required]
-        public decimal Price { get; set; }
+    public int Quantity { get; set; }
 
-        [Required]
-        public decimal Cost { get; set; }
+    public int? SupplierId { get; set; }
 
-        [Required]
-        public int StockCount { get; set; }
-
-        public string ImageUrl { get; set; }
-
-        public Category Category { get; set; }
-    }
+    public virtual Supplier ProductNavigation { get; set; } = null!;
 }
