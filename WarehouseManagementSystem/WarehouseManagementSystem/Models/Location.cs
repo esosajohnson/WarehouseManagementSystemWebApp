@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace WarehouseManagementSystem.Models;
 
-public partial class Supplier
+public partial class Location
 {
-    public int SupplierId { get; set; }
+    public int LocationId { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public string? Email { get; set; }
+    public string? Aisle { get; set; }
 
-    public string? Phone { get; set; }
+    public string? Shelf { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

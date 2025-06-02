@@ -288,12 +288,6 @@ C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\Warehou
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets\msbuild.WarehouseManagementSystem.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets\msbuild.WarehouseManagementSystem.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets\msbuild.build.WarehouseManagementSystem.props
-C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.WarehouseManagementSystem.props
-C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.WarehouseManagementSystem.props
-C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\Warehous.E850F5C5.Up2Date
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\WarehouseManagementSystem.dll
@@ -301,3 +295,4 @@ C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\Warehou
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\WarehouseManagementSystem.pdb
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\WarehouseManagementSystem.genruntimeconfig.cache
 C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\ref\WarehouseManagementSystem.dll
+C:\Users\esosa\OneDrive\Documents\GitHub\WarehouseManagementSystemWebApp\WarehouseManagementSystem\WarehouseManagementSystem\obj\Debug\net9.0\staticwebassets.build.json.cache

@@ -15,5 +15,11 @@ public partial class Product
 
     public int? SupplierId { get; set; }
 
-    public virtual Supplier ProductNavigation { get; set; } = null!;
+    public int? LocationId { get; set; }
+
+    public virtual ICollection<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
+
+    public virtual Location? Location { get; set; }
+
+    public virtual Supplier? Supplier { get; set; }
 }
