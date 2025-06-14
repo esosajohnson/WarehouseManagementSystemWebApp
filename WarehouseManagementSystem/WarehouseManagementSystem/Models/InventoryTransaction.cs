@@ -11,11 +11,13 @@ public partial class InventoryTransaction
 
     public int QuantityChanged { get; set; }
 
-    public string TransactionType { get; set; } = null!;
+    public string? TransactionType { get; set; }
 
     public DateTime TransactionDate { get; set; }
 
     public string? Notes { get; set; }
+
+    public int? EmployeeId { get; set; }
 
     public virtual Product Product { get; set; } = null!;
 }

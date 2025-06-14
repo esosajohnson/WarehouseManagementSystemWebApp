@@ -17,6 +17,10 @@ public partial class Product
 
     public int? LocationId { get; set; }
 
+    public int? CategoryId { get; set; }
+
+    public virtual Category? Category { get; set; }
+
     public virtual ICollection<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
 
     public virtual Location? Location { get; set; }
