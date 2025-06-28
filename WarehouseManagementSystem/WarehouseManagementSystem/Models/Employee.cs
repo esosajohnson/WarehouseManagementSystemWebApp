@@ -20,4 +20,6 @@ public partial class Employee
     public DateTime HireDate { get; set; }
 
     public bool IsActive { get; set; }
+
+    public virtual ICollection<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
 }

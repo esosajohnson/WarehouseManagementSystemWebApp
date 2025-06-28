@@ -63,6 +63,10 @@ public partial class WarehouseDbContext : DbContext
             entity.Property(e => e.TransactionDate).HasColumnType("datetime");
             entity.Property(e => e.TransactionType).HasMaxLength(50);
 
+            entity.HasOne(d => d.Employee).WithMany(p => p.InventoryTransactions)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_InventoryTransaction_Employee");
+
             entity.HasOne(d => d.Product).WithMany(p => p.InventoryTransactions)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

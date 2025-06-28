@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var lowStock = ViewData["LowStock"] as List<WarehouseManagementSystem.Models.Product>;
+    var recentTransactions = ViewData["RecentTransactions"] as List<WarehouseManagementSystem.Models.InventoryTransaction>;
+}
+
+<h2>📊 Warehouse Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card bg-light p-3 shadow-sm">
+            <h5>Total Products</h5>
+            <h3>@ViewData["TotalProducts"]</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-light p-3 shadow-sm">
+            <h5>Total Suppliers</h5>
+            <h3>@ViewData["TotalSuppliers"]</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-light p-3 shadow-sm">
+            <h5>Total Categories</h5>
+            <h3>@ViewData["TotalCategories"]</h3>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h4 class="mt-4">⚠️ Low Stock Products</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in lowStock)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Sku</td>
+                <td>@product.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4 class="mt-4">🧾 Recent Transactions</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity Change</th>
+            <th>Type</th>
+            <th>Employee</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tx in recentTransactions)
+        {
+            <tr>
+                <td>@tx.Product?.Name</td>
+                <td>@tx.QuantityChanged</td>
+                <td>@tx.TransactionType</td>
+                <td>@(tx.Employee?.FirstName + " " + tx.Employee?.LastName)</td>
+                <td>@tx.TransactionDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
