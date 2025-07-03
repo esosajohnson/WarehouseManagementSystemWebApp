@@ -1,8 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-4">📦 Warehouse Management System</h1>
+    <p class="lead">Efficiently track products, suppliers, and stock transactions all in one place.</p>
+
+    <hr />
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Total Products</h5>
+                <h2>@ViewData["TotalProducts"]</h2>
+                <a class="btn btn-primary mt-2" href="/Products">Manage Products</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Total Suppliers</h5>
+                <h2>@ViewData["TotalSuppliers"]</h2>
+                <a class="btn btn-primary mt-2" href="/Supplier">View Suppliers</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Total Categories</h5>
+                <h2>@ViewData["TotalCategories"]</h2>
+                <a class="btn btn-primary mt-2" href="/Category">View Categories</a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <a class="btn btn-success btn-lg" href="/Dashboard">Go to Dashboard</a>
 </div>
+
