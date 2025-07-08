@@ -158,11 +158,16 @@ namespace WarehouseManagementSystem.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
-            if (product != null)
+
+            // Check if this product has transactions
+            var hasTransactions = await _context.InventoryTransactions.AnyAsync(t => t.ProductId == id);
+            if (hasTransactions)
             {
-                _context.Products.Remove(product);
+                TempData["ErrorMessage"] = "Cannot delete product because it has related transactions.";
+                return RedirectToAction(nameof(Index));
             }
 
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
