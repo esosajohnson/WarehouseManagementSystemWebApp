@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<WarehouseManagementSystem.Models.Category>
 
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["ErrorMessage"]
+	</div>
+}
+
 @{
     ViewData["Title"] = "Categories";
 }
@@ -40,7 +47,7 @@
 						<a asp-action="Details" asp-route-id="@entry.CategoryId" class="btn btn-secondary btn-sm">
 							Details
 						</a> |
-						<a asp-controller="DiaryEntries" asp-action="Delete" asp-route-id="@entry.CategoryId" class="btn btn-danger btn-sm">
+						<a asp-action="Delete" asp-route-id="@entry.CategoryId" class="btn btn-danger btn-sm">
 							Delete
 						</a>
 					</td>

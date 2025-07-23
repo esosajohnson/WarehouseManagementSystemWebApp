@@ -128,12 +128,22 @@ namespace WarehouseManagementSystem.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            if (category == null)
+            {
+                return NotFound("Category not found.");
+            }
+            try
             {
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            } catch (DbUpdateException)
+            {
+                // Handle the exception, e.g., log it and show a user-friendly message
+                TempData["ErrorMessage"] = ("Unable to delete category. It may be in use by products or other entities.");
+                return RedirectToAction(nameof(Index));
+
             }
-            return RedirectToAction(nameof(Index));
         }
 
         private bool CategoryExists(int id)
