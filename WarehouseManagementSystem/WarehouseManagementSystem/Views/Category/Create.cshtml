@@ -22,8 +22,8 @@
                     <input asp-for="Description" class="form-control" placeholder="Enter a description">
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <div class="form-group mb-3">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Create</button>
                     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
                 </div>
             </form>
