@@ -1,0 +1,23 @@
+﻿@model WarehouseManagementSystem.Models.Category
+
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h3>Delete Category</h3>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete the category "<strong>@Model.Name</strong>"?</p>
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="CategoryId" />
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
