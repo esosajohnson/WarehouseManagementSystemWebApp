@@ -139,13 +139,21 @@ namespace WarehouseManagementSystem.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var supplier = await _context.Suppliers.FindAsync(id);
-            if (supplier != null)
+            if (supplier == null)
+            {
+                return NotFound("Supplier not found.");
+            }
+            try
             {
                 _context.Suppliers.Remove(supplier);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (DbUpdateException)
+            {
+                TempData["ErrorMessage"] = "Unable to delete supplier. It may be referenced by other records.";
+                return RedirectToAction("Index");
+            }
         }
 
         private bool SupplierExists(int id)
