@@ -33,7 +33,7 @@
 
 <div class="table-responsive">
     <table class="table table-striped table-hover">
-        <thead class="table-dark">
+        <thead class="table-primary">
             <tr>
                 <th>Name</th>
                 <th>Sku</th>
@@ -55,8 +55,8 @@
                     <td>@entry.Location?.Name</td>
                     <td>@entry.Supplier?.Name</td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@entry.ProductId" class="btn btn-info btn-sm">Details</a>
                         <a asp-action="Edit" asp-route-id="@entry.ProductId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@entry.ProductId" class="btn btn-info btn-sm">Details</a>
                         <a asp-action="Delete" asp-route-id="@entry.ProductId" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
