@@ -13,17 +13,17 @@ public partial class Product
 
     public int Quantity { get; set; }
 
-    public int? SupplierId { get; set; }
+    public int SupplierId { get; set; }
 
-    public int? LocationId { get; set; }
+    public int LocationId { get; set; }
 
-    public int? CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
-    public virtual Category? Category { get; set; }
+    public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
 
-    public virtual Location? Location { get; set; }
+    public virtual Location Location { get; set; } = null!;
 
-    public virtual Supplier? Supplier { get; set; }
+    public virtual Supplier Supplier { get; set; } = null!;
 }
