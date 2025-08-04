@@ -49,9 +49,9 @@ namespace WarehouseManagementSystem.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId");
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", null);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", null);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", null);
             return View();
         }
 
@@ -68,9 +68,9 @@ namespace WarehouseManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", product.LocationId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", product.SupplierId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", product.LocationId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", product.SupplierId);
             return View(product);
         }
 
@@ -87,9 +87,9 @@ namespace WarehouseManagementSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", product.LocationId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", product.SupplierId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", product.LocationId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", product.SupplierId);
             return View(product);
         }
 
@@ -125,9 +125,9 @@ namespace WarehouseManagementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", product.LocationId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", product.SupplierId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", product.LocationId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", product.SupplierId);
             return View(product);
         }
 
