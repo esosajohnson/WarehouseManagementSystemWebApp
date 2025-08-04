@@ -31,17 +31,23 @@
                         </div>
                         <div class="form-group mb-3">
                             <label asp-for="CategoryId" class="control-label">Category</label>
-                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                                <option value="">-- Please select a category --</option>
+                            </select>
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
                         </div>
                         <div class="form-group mb-3">
                             <label asp-for="SupplierId" class="control-label">Supplier</label>
-                            <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                            <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
+                                <option value="">-- Please select a supplier --</option>
+                            </select>
                             <span asp-validation-for="SupplierId" class="text-danger"></span>
                         </div>
                         <div class="form-group mb-3">
                             <label asp-for="LocationId" class="control-label">Location</label>
-                            <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                            <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId">
+                                <option value="">-- Please select a location --</option>
+                            </select>
                             <span asp-validation-for="LocationId" class="text-danger"></span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">

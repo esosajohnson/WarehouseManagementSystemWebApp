@@ -49,9 +49,9 @@ namespace WarehouseManagementSystem.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", null);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", null);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", null);
             return View();
         }
 
