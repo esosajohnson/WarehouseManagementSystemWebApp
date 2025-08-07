@@ -1,0 +1,27 @@
+﻿@model WarehouseManagementSystem.Models.Supplier
+
+@{
+    ViewData["Title"] = "Supplier Details";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h3>@ViewData["Title"]</h3>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Supplier Name</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+                <dt class="col-sm-3">Phone</dt>
+                <dd class="col-sm-9">@Model.Phone</dd>
+            </dl>
+            <div class="d-flex justify-content-between">
+                <a asp-action="Edit" asp-route-id="@Model.SupplierId" class="btn btn-warning">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to Suppliers</a>
+            </div>
+        </div>
+    </div>
+</div>
