@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace WarehouseManagementSystem.Models;
 
-public partial class WarehouseDbContext : DbContext
+public partial class WarehouseDbContext : IdentityDbContext
 {
-    public WarehouseDbContext()
-    {
-    }
-
     public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options)
         : base(options)
     {
