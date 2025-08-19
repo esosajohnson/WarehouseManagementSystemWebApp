@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WarehouseManagementSystem.Models;
 
-public partial class WarehouseDbContext : IdentityDbContext
+public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
 {
     public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options)
         : base(options)
@@ -32,6 +32,8 @@ public partial class WarehouseDbContext : IdentityDbContext
     {
         modelBuilder.Entity<Category>(entity =>
         {
+            base.OnModelCreating(modelBuilder);
+
             entity.ToTable("Category");
 
             entity.Property(e => e.Description).HasMaxLength(250);
