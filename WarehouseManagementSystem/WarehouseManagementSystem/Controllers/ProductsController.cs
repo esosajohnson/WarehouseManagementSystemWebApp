@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.Models;
 
 namespace WarehouseManagementSystem.Controllers
@@ -19,6 +20,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Products
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var warehouseDbContext = _context.Products.Include(p => p.Category).Include(p => p.Location).Include(p => p.Supplier);
@@ -47,6 +49,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", null);
@@ -75,6 +78,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -132,6 +136,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
