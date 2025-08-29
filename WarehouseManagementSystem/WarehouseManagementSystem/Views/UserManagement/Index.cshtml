@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ApplicationUser>
+
+<h2>User Management</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>
+                    @(User.IsInRole("Admin") ? "Admin" : "Client")
+                </td>
+                <td>
+                    <form asp-action="PromoteToAdmin" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-success">Promote to Admin</button>
+                    </form>
+
+                    <form asp-action="DemoteToClient" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-warning">Demote to Client</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
