@@ -18,7 +18,22 @@ namespace WarehouseManagementSystem.Controllers
         public IActionResult Index()
         {
             var users = _userManager.Users.ToList();
-            return View(users);
+            var model = new List<UserViewModel>();
+
+            foreach (var user in users)
+            {
+                var roles = _userManager.GetRolesAsync(user).Result;
+                model.Add(new UserViewModel
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    DateOfBirth = DateOnly.FromDateTime(user.DateOfBirth),
+                    Email = user.Email,
+                    Role = roles
+                });
+            }
+
+            return View(model);
         }
 
         [HttpPost]
