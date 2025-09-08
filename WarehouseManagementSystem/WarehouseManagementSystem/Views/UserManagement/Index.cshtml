@@ -41,23 +41,27 @@
                     <td>@user.DateOfBirth.ToShortDateString()</td>
                     <td>@string.Join(", ", user.Role)</td>
                     <td>
-                        <form asp-action="PromoteToAdmin" method="post" style="display:inline" class="action-form">
-                            <input type="hidden" name="userId" value="@user.Id" />
-                            <button type="button" class="btn btn-success"
-                                    @(user.Role.Contains("Admin") ? "disabled" : "")
-                                    onclick="showConfirmModal(this, 'Are you sure you want to promote this user to Admin?')">
-                                Promote to Admin
-                            </button>
-                        </form>
+                        @if (!user.Role.Contains("Admin"))
+                        {
+                            <form asp-action="PromoteToAdmin" method="post" style="display:inline" class="action-form">
+                                <input type="hidden" name="userId" value="@user.Id" />
+                                <button type="button" class="btn btn-success"
+                                        onclick="showConfirmModal(this, 'Are you sure you want to promote this user to Admin?')">
+                                    Promote to Admin
+                                </button>
+                            </form>
+                        }
 
-                        <form asp-action="DemoteToClient" method="post" style="display:inline" class="action-form">
-                            <input type="hidden" name="userId" value="@user.Id" />
-                            <button type="button" class="btn btn-warning"
-                                    @(user.Role.Contains("Client") ? "disabled" : "")
-                                    onclick="showConfirmModal(this, 'Are you sure you want to demote this user to Client?')">
-                                Demote to Client
-                            </button>
-                        </form>
+                        @if (!user.Role.Contains("Client"))
+                        {
+                            <form asp-action="DemoteToClient" method="post" style="display:inline" class="action-form">
+                                <input type="hidden" name="userId" value="@user.Id" />
+                                <button type="button" class="btn btn-warning"
+                                        onclick="showConfirmModal(this, 'Are you sure you want to demote this user to Client?')">
+                                    Demote to Client
+                                </button>
+                            </form>
+                        }
                     </td>
                 </tr>
             }
