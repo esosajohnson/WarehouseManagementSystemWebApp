@@ -1,43 +1,64 @@
 ﻿@model IEnumerable<UserViewModel>
 
-<h2>User Management</h2>
+@{
+    ViewData["Title"] = "User Management";
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Date of Birth</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6" style="margin-left: -13px;">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-4">
+    <div class="alert alert-info" role="alert" style="margin-left: -13px; width: 102%;">
+        <strong>Note:</strong> You can promote users to Admin or demote them to Client using the buttons below.
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-primary">
             <tr>
-                <td>@user.FullName</td>
-                <td>@user.Email</td>
-                <td>@user.DateOfBirth.ToShortDateString()</td>
-                <td>@string.Join(", ", user.Role)</td>
-                <td>
-                    <form asp-action="PromoteToAdmin" method="post" style="display:inline">
-                        <input type="hidden" name="userId" value="@user.Id" />
-                        <button type="submit" class="btn btn-success"
-                                @(user.Role.Contains("Admin") ? "disabled" : "")>
-                            Promote to Admin
-                        </button>
-                    </form>
-
-                    <form asp-action="DemoteToClient" method="post" style="display:inline">
-                        <input type="hidden" name="userId" value="@user.Id" />
-                        <button type="submit" class="btn btn-warning"
-                                @(user.Role.Contains("Client") ? "disabled" : "")>
-                            Demote to Client
-                        </button>
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Role</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>@user.DateOfBirth.ToShortDateString()</td>
+                    <td>@string.Join(", ", user.Role)</td>
+                    <td>
+                        <form asp-action="PromoteToAdmin" method="post" style="display:inline">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-success"
+                                    @(user.Role.Contains("Admin") ? "disabled" : "")>
+                                Promote to Admin
+                            </button>
+                        </form>
+
+                        <form asp-action="DemoteToClient" method="post" style="display:inline">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-warning"
+                                    @(user.Role.Contains("Client") ? "disabled" : "")>
+                                Demote to Client
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
