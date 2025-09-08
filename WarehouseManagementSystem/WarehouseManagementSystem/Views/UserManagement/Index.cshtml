@@ -4,13 +4,13 @@
     ViewData["Title"] = "User Management";
 }
 
-<div class="container">
+<div class="container mb-2">
     <div class="row pt-4">
         <div class="col-6" style="margin-left: -13px;">
             <h1>@ViewData["Title"]</h1>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Back to Home</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="margin-right: -22px;">Back to Home</a>
         </div>
     </div>
 </div>
@@ -41,18 +41,20 @@
                     <td>@user.DateOfBirth.ToShortDateString()</td>
                     <td>@string.Join(", ", user.Role)</td>
                     <td>
-                        <form asp-action="PromoteToAdmin" method="post" style="display:inline">
+                        <form asp-action="PromoteToAdmin" method="post" style="display:inline" class="action-form">
                             <input type="hidden" name="userId" value="@user.Id" />
-                            <button type="submit" class="btn btn-success"
-                                    @(user.Role.Contains("Admin") ? "disabled" : "")>
+                            <button type="button" class="btn btn-success"
+                                    @(user.Role.Contains("Admin") ? "disabled" : "")
+                                    onclick="showConfirmModal(this, 'Are you sure you want to promote this user to Admin?')">
                                 Promote to Admin
                             </button>
                         </form>
 
-                        <form asp-action="DemoteToClient" method="post" style="display:inline">
+                        <form asp-action="DemoteToClient" method="post" style="display:inline" class="action-form">
                             <input type="hidden" name="userId" value="@user.Id" />
-                            <button type="submit" class="btn btn-warning"
-                                    @(user.Role.Contains("Client") ? "disabled" : "")>
+                            <button type="button" class="btn btn-warning"
+                                    @(user.Role.Contains("Client") ? "disabled" : "")
+                                    onclick="showConfirmModal(this, 'Are you sure you want to demote this user to Client?')">
                                 Demote to Client
                             </button>
                         </form>
@@ -62,3 +64,36 @@
         </tbody>
     </table>
 </div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirm Action</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="confirmModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmModalYes">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let formToSubmit = null;
+
+    function showConfirmModal(button, message) {
+        formToSubmit = button.closest('form');
+        document.getElementById('confirmModalBody').textContent = message;
+        var modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        modal.show();
+
+        document.getElementById('confirmModalYes').onclick = function () {
+            modal.hide();
+            if (formToSubmit) formToSubmit.submit();
+        };
+    }
+</script>
