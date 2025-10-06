@@ -1,0 +1,103 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var user = await UserManager.GetUserAsync(User);
+    var isAdmin = user != null && await UserManager.IsInRoleAsync(user, "Admin");
+}
+
+<style>
+    /* Sidebar container */
+    .manage-nav {
+        background-color: #f8f9fa;
+        border-radius: 15px;
+        padding: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Navigation links */
+    .manage-nav .nav-link {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        color: #495057;
+        border-radius: 10px;
+        transition: all 0.2s ease-in-out;
+        margin-bottom: 0.3rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .manage-nav .nav-link:hover {
+        background-color: #e9ecef;
+        color: #0d6efd;
+        transform: translateX(3px);
+    }
+
+    /* Active link */
+    .manage-nav .nav-link.active {
+        background-color: #0d6efd;
+        color: #fff !important;
+        box-shadow: 0 3px 6px rgba(13, 110, 253, 0.3);
+    }
+
+    /* Optional icons */
+    .manage-nav .nav-link i {
+        margin-right: 10px;
+        font-size: 1rem;
+    }
+</style>
+
+<div class="manage-nav">
+    <ul class="nav flex-column nav-pills shadow-sm rounded-3 p-3 bg-white" style="max-width: 280px;">
+        <li class="nav-item mb-2">
+            <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="overview" asp-page="./Index">
+                <i class="bi bi-person-circle me-2"></i> Account Overview
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a class="nav-link @ManageNavPages.EditProfileNavClass(ViewContext)" id="edit-profile" asp-page="./EditProfile">
+                <i class="bi bi-pencil-square me-2"></i> Edit Profile
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+                <i class="bi bi-lock-fill me-2"></i> Change Password
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a class="nav-link @ManageNavPages.SecurityNavClass(ViewContext)" id="security" asp-page="./SecuritySettings">
+                <i class="bi bi-shield-lock-fill me-2"></i> Security Settings
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a class="nav-link @ManageNavPages.NotificationsNavClass(ViewContext)" id="notifications" asp-page="./Notifications">
+                <i class="bi bi-bell-fill me-2"></i> Notifications
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a class="nav-link @ManageNavPages.ActivityNavClass(ViewContext)" id="activity" asp-page="./ActivityLog">
+                <i class="bi bi-clock-history me-2"></i> My Activity
+            </a>
+        </li>
+
+        @if (isAdmin)
+        {
+            <li class="nav-item mb-2 border-top pt-2">
+                <a class="nav-link @ManageNavPages.UserManagementNavClass(ViewContext)" id="user-management" asp-controller="UserManagement" asp-action="Index">
+                    <i class="bi bi-people-fill me-2"></i> Manage Users
+                </a>
+            </li>
+        }
+
+        <li class="nav-item border-top pt-2">
+            <a class="nav-link text-danger @ManageNavPages.DeleteAccountNavClass(ViewContext)" id="delete-account" asp-page="./DeleteAccount">
+                <i class="bi bi-x-circle-fill me-2"></i> Delete Account
+            </a>
+        </li>
+    </ul>
+</div>
