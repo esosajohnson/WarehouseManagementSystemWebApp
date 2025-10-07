@@ -1,0 +1,35 @@
+﻿@page
+@model WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage.EditProfileModel
+@{
+    ViewData["Title"] = "Edit Profile";
+    ViewData["ActivePage"] = ManageNavPages.EditProfile;
+}
+
+<h4 class="mb-4 text-primary fw-semibold">Edit Profile</h4>
+<div class="card shadow-sm border-0 rounded-4 p-4">
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.FullName" class="form-label fw-semibold">Full Name</label>
+            <input asp-for="Input.FullName" class="form-control" />
+            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Email" class="form-label fw-semibold">Email Address</label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.PhoneNumber" class="form-label fw-semibold">Phone Number</label>
+            <input asp-for="Input.PhoneNumber" class="form-control" />
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary rounded-3 px-4">Save Changes</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

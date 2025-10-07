@@ -1,55 +1,26 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "My Profile";
+    ViewData["Title"] = "Account Overview";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg border-0">
-                <div class="card-header bg-primary text-white text-center">
-                    <h3 class="mb-0">Account Profile</h3>
-                </div>
-                <div class="card-body p-4">
-                    <partial name="_StatusMessage" for="StatusMessage" />
-                    <form id="profile-form" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+<h3 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
 
-                        <div class="form-floating mb-3">
-                            <input asp-for="Username" class="form-control" placeholder="Username" disabled />
-                            <label asp-for="Username"></label>
-                        </div>
+<div class="card shadow-sm border-0 mb-4" style="max-width: 600px;">
+    <div class="card-body">
+        <h5 class="card-title mb-3 text-secondary">Profile Information</h5>
 
-                        <div class="form-floating mb-3">
-                            <input asp-for="Input.FullName" class="form-control" placeholder="Full Name" />
-                            <label asp-for="Input.FullName"></label>
-                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
-                        </div>
+        <div class="mb-2"><strong>Full Name:</strong> @Model.FullName</div>
+        <div class="mb-2"><strong>Email:</strong> @Model.Email</div>
+        <div class="mb-2"><strong>Phone:</strong> @Model.PhoneNumber</div>
+        <div class="mb-2"><strong>Role:</strong> @Model.Role</div>
 
-                        <div class="form-floating mb-3">
-                            <input asp-for="Input.DateOfBirth" class="form-control" type="date" placeholder="Date of Birth" />
-                            <label asp-for="Input.DateOfBirth"></label>
-                            <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
-                        </div>
+        <hr />
 
-                        <div class="form-floating mb-3">
-                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" />
-                            <label asp-for="Input.PhoneNumber"></label>
-                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                        </div>
-
-                        <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">
-                            Save Changes
-                        </button>
-                    </form>
-                </div>
-            </div>
+        <div class="text-end">
+            <a asp-page="./EditProfile" class="btn btn-primary px-4">Edit Profile</a>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
