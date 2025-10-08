@@ -9,7 +9,7 @@ namespace WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage
         public static string Index => "Index";
         public static string EditProfile => "EditProfile";
         public static string ChangePassword => "ChangePassword";
-        public static string SecuritySettings => "SecuritySettings";
+        public static string Security => "Security";
         public static string Notifications => "Notifications";
         public static string ActivityLog => "ActivityLog";
         public static string UserManagement => "UserManagement";
@@ -18,7 +18,7 @@ namespace WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
         public static string EditProfileNavClass(ViewContext viewContext) => PageNavClass(viewContext, EditProfile);
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
-        public static string SecurityNavClass(ViewContext viewContext) => PageNavClass(viewContext, SecuritySettings);
+        public static string SecurityNavClass(ViewContext viewContext) => PageNavClass(viewContext, Security);
         public static string NotificationsNavClass(ViewContext viewContext) => PageNavClass(viewContext, Notifications);
         public static string ActivityNavClass(ViewContext viewContext) => PageNavClass(viewContext, ActivityLog);
         public static string UserManagementNavClass(ViewContext viewContext) => PageNavClass(viewContext, UserManagement);
