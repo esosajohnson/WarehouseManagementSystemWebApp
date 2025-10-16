@@ -14,6 +14,8 @@ namespace WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage
         public static string ActivityLog => "ActivityLog";
         public static string UserManagement => "UserManagement";
         public static string DeleteAccount => "DeleteAccount";
+        public static string TwoFactorAuthentication => "TwoFactorAuthentication";
+        public static string DeletePersonalData => "DeletePersonalData";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
         public static string EditProfileNavClass(ViewContext viewContext) => PageNavClass(viewContext, EditProfile);
@@ -23,6 +25,8 @@ namespace WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage
         public static string ActivityNavClass(ViewContext viewContext) => PageNavClass(viewContext, ActivityLog);
         public static string UserManagementNavClass(ViewContext viewContext) => PageNavClass(viewContext, UserManagement);
         public static string DeleteAccountNavClass(ViewContext viewContext) => PageNavClass(viewContext, DeleteAccount);
+        public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
+        public static string DeletePersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, DeletePersonalData);
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {
