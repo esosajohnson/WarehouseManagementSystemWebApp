@@ -1,0 +1,51 @@
+﻿@page
+@model WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage.EditProfileModel
+@{
+    ViewData["Title"] = "Edit Profile";
+    ViewData["ActivePage"] = ManageNavPages.EditProfile;
+}
+
+<div class="container py-5">
+    <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 600px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <div class="mb-2 text-primary">
+                    <i class="bi bi-pencil-square" style="font-size: 3rem;"></i>
+                </div>
+                <h2 class="fw-bold text-primary">@ViewData["Title"]</h2>
+                <p class="text-muted mb-0">Edit your profile details.</p>
+            </div>
+
+            <partial name="_StatusMessage" for="StatusMessage" />
+
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="Input.FullName" class="form-label fw-semibold">Full Name</label>
+                    <input asp-for="Input.FullName" class="form-control" />
+                    <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label fw-semibold">Email</label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-4">
+                    <label asp-for="Input.PhoneNumber" class="form-label fw-semibold">Phone Number</label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                        <i class="bi bi-pencil-square me-2"></i>Save Changes
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

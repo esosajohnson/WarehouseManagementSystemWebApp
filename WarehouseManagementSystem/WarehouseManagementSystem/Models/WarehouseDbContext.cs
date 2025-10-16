@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace WarehouseManagementSystem.Models;
 
-public partial class WarehouseDbContext : DbContext
+public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
 {
-    public WarehouseDbContext()
-    {
-    }
-
     public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options)
         : base(options)
     {
@@ -35,6 +32,8 @@ public partial class WarehouseDbContext : DbContext
     {
         modelBuilder.Entity<Category>(entity =>
         {
+            base.OnModelCreating(modelBuilder);
+
             entity.ToTable("Category");
 
             entity.Property(e => e.Description).HasMaxLength(250);

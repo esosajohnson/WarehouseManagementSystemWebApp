@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.Models;
 
 namespace WarehouseManagementSystem.Controllers
@@ -14,6 +15,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Category
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categories.ToListAsync());
@@ -36,6 +38,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Category/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +61,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Category/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,6 +111,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: Category/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
