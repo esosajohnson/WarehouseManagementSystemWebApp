@@ -1,4 +1,94 @@
 ﻿@page
 @model WarehouseManagementSystem.Areas.Identity.Pages.Account.Manage.NotificationsModel
+
 @{
+    ViewData["Title"] = "Notifications";
 }
+
+<h3 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h3>
+
+<div class="card shadow-sm border-0 rounded-4 mb-4">
+    <div class="card-body">
+
+        <div class="d-flex align-items-center mb-3">
+            <div class="me-2">
+                <i class="bi bi-bell-fill text-warning fs-3"></i>
+            </div>
+            <div>
+                <h5 class="mb-0 fw-semibold">Recent Notifications</h5>
+                <small class="text-muted">Warehouse and system alerts</small>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- Example Warehouse-Related Notifications -->
+        <ul class="list-group list-group-flush">
+
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="bi bi-box-seam text-primary me-2"></i>
+                        <strong>New Shipment Arrival</strong>
+                        <div class="text-muted small">Shipment #4021 has arrived at Dock 3.</div>
+                    </div>
+                    <span class="text-muted small">2h ago</span>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="bi bi-exclamation-octagon text-danger me-2"></i>
+                        <strong>Low Stock Warning</strong>
+                        <div class="text-muted small">Item "Steel Bolts (M8)" dropped below threshold.</div>
+                    </div>
+                    <span class="text-muted small">5h ago</span>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="bi bi-clock-history text-info me-2"></i>
+                        <strong>Shipment Delayed</strong>
+                        <div class="text-muted small">Supplier ETA revised for order #8843.</div>
+                    </div>
+                    <span class="text-muted small">Yesterday</span>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="bi bi-clipboard-check text-success me-2"></i>
+                        <strong>Inventory Audit Completed</strong>
+                        <div class="text-muted small">Aisle 5 stock levels have been reconciled.</div>
+                    </div>
+                    <span class="text-muted small">2 days ago</span>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="bi bi-people-fill text-secondary me-2"></i>
+                        <strong>New Staff Member Added</strong>
+                        <div class="text-muted small">"James Carter" joined as Warehouse Operator.</div>
+                    </div>
+                    <span class="text-muted small">3 days ago</span>
+                </div>
+            </li>
+
+        </ul>
+
+        <hr />
+
+        <div class="text-end">
+            <button class="btn btn-outline-danger">
+                <i class="bi bi-trash me-1"></i> Clear All Notifications
+            </button>
+        </div>
+
+    </div>
+</div>
