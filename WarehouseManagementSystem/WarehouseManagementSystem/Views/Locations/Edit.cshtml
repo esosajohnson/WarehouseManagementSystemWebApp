@@ -1,0 +1,30 @@
+﻿@model WarehouseManagementSystem.Models.Location
+@{
+    ViewData["Title"] = "Edit Location";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm p-4 border-0 rounded-4 mx-auto" style="max-width: 800px;">
+        <h2 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h2>
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="LocationId" />
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label fw-semibold"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Aisle" class="form-label fw-semibold"></label>
+                <input asp-for="Aisle" class="form-control" />
+                <span asp-validation-for="Aisle" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Shelf" class="form-label fw-semibold"></label>
+                <input asp-for="Shelf" class="form-control" />
+                <span asp-validation-for="Shelf" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+            <a asp-action="Index" class="btn btn-outline-secondary ms-2 px-4">Back to List</a>
+        </form>
+    </div>
+</div>
