@@ -1,0 +1,25 @@
+﻿@model WarehouseManagementSystem.Models.Location
+
+@{
+    ViewData["Title"] = "Delete Location";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 600px;">
+        <h3 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h3>
+        <h5 class="mb-4">Are you sure you want to delete this location?</h5>
+        <dl class="row mb-4">
+            <dt class="col-sm-4 fw-semibold">Name</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+            <dt class="col-sm-4 fw-semibold">Aisle</dt>
+            <dd class="col-sm-8">@Model.Aisle</dd>
+            <dt class="col-sm-4 fw-semibold">Shelf</dt>
+            <dd class="col-sm-8">@Model.Shelf</dd>
+        </dl>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="LocationId" />
+            <button type="submit" class="btn btn-danger px-4">Delete</button>
+            <a asp-action="Index" class="btn btn-outline-secondary ms-2 px-4">Cancel</a>
+        </form>
+    </div>
+</div>
