@@ -2,38 +2,86 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center mt-5">
-    <h1 class="display-4">📦 Warehouse Management System</h1>
-    <p class="lead">Efficiently track products, suppliers, and stock transactions all in one place.</p>
+<div class="container mt-5">
+    <h1 class="text-primary fw-bold mb-3">
+        <i class="bi bi-grid-fill me-2"></i> Warehouse Management Dashboard
+    </h1>
+    <p class="text-muted mb-4">A quick overview of your warehouse operations — products, staff, and stock movements.</p>
 
-    <hr />
+    <div class="row g-4">
 
-    <div class="row mt-4">
+        <!-- PRODUCTS -->
         <div class="col-md-4">
-            <div class="card p-3 shadow-sm">
-                <h5>Total Products</h5>
-                <h2>@ViewData["TotalProducts"]</h2>
-                <a class="btn btn-primary mt-2" href="/Products">Manage Products</a>
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body text-center">
+                    <i class="bi bi-box-seam fs-1 text-primary"></i>
+                    <h5 class="fw-semibold mt-3">Total Products</h5>
+                    <h2 class="fw-bold">@ViewData["TotalProducts"]</h2>
+                    <a class="btn btn-primary mt-2 w-100" href="/Products">Manage Products</a>
+                </div>
             </div>
         </div>
+
+        <!-- SUPPLIERS -->
         <div class="col-md-4">
-            <div class="card p-3 shadow-sm">
-                <h5>Total Suppliers</h5>
-                <h2>@ViewData["TotalSuppliers"]</h2>
-                <a class="btn btn-primary mt-2" href="/Suppliers">View Suppliers</a>
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body text-center">
+                    <i class="bi bi-people-fill fs-1 text-success"></i>
+                    <h5 class="fw-semibold mt-3">Total Suppliers</h5>
+                    <h2 class="fw-bold">@ViewData["TotalSuppliers"]</h2>
+                    <a class="btn btn-success mt-2 w-100" href="/Suppliers">View Suppliers</a>
+                </div>
             </div>
         </div>
+
+        <!-- CATEGORIES -->
         <div class="col-md-4">
-            <div class="card p-3 shadow-sm">
-                <h5>Total Categories</h5>
-                <h2>@ViewData["TotalCategories"]</h2>
-                <a class="btn btn-primary mt-2" href="/Category">View Categories</a>
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body text-center">
+                    <i class="bi bi-tags-fill fs-1 text-warning"></i>
+                    <h5 class="fw-semibold mt-3">Total Categories</h5>
+                    <h2 class="fw-bold">@ViewData["TotalCategories"]</h2>
+                    <a class="btn btn-warning mt-2 w-100" href="/Category">View Categories</a>
+                </div>
             </div>
         </div>
+
+        <!-- EMPLOYEES -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body text-center">
+                    <i class="bi bi-person-badge-fill fs-1 text-info"></i>
+                    <h5 class="fw-semibold mt-3">Total Employees</h5>
+                    <h2 class="fw-bold">@ViewData["TotalEmployees"]</h2>
+                    <a class="btn btn-info mt-2 w-100" href="/Employees">View Employees</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- INVENTORY TRANSACTIONS -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body text-center">
+                    <i class="bi bi-arrow-left-right fs-1 text-danger"></i>
+                    <h5 class="fw-semibold mt-3">Inventory Movements</h5>
+                    <h2 class="fw-bold">@ViewData["InventoryTransactions"]</h2>
+                    <a class="btn btn-danger mt-2 w-100" href="/InventoryTransactions">View Transactions</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCATIONS (Newly Added Page) -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body text-center">
+                    <i class="bi bi-geo-alt-fill fs-1 text-secondary"></i>
+                    <h5 class="fw-semibold mt-3">Storage Locations</h5>
+                    <h2 class="fw-bold">@ViewData["TotalLocations"]</h2>
+                    <a class="btn btn-secondary mt-2 w-100" href="/Locations">Manage Locations</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <hr class="my-4" />
-
-    <a class="btn btn-success btn-lg" href="/Dashboard">Go to Dashboard</a>
 </div>
-

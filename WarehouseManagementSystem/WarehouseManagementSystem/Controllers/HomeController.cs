@@ -21,10 +21,16 @@ namespace WarehouseManagementSystem.Controllers
             var totalProducts = await _context.Products.CountAsync();
             var totalSuppliers = await _context.Suppliers.CountAsync();
             var totalCategories = await _context.Categories.CountAsync();
+            var totalLocations = await _context.Locations.CountAsync();
+            var totalEmployees = await _context.Employees.CountAsync();
+            var InventoryTransactions = await _context.InventoryTransactions.CountAsync();
 
             ViewData["TotalProducts"] = totalProducts;
             ViewData["TotalSuppliers"] = totalSuppliers;
             ViewData["TotalCategories"] = totalCategories;
+            ViewData["TotalLocations"] = totalLocations;
+            ViewData["TotalEmployees"] = totalEmployees;
+            ViewData["InventoryTransactions"] = InventoryTransactions;
 
             return View();
         }
