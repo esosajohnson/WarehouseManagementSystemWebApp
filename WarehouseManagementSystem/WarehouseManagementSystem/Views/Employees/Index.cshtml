@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WarehouseManagementSystem.Models.Employee>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary fw-semibold">@ViewData["Title"]</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i>Add New Employee
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-12">
+            <p class="text-muted">
+                Manage your warehouse employees here. You can add, edit, or remove employee records as needed.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-4">
+        @if (!Model.Any())
+        {
+            <p class="text-muted">
+                No employees found. Click "Add New Employee" to create one.
+            </p>
+        }
+        else
+        {
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Is Active?</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in Model)
+                    {
+                        <tr>
+                            <td>@entry.FullName</td>
+                            <td>@entry.Position</td>
+                            <td>@entry.Email</td>
+                            <td>@entry.Phone</td>
+                            <td>
+                                @if (entry.IsActive)
+                                {
+                                    <span class="badge bg-success" style="font-size: 3rem;">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger" style="font-size: 3rem;">No</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@entry.EmployeeId"
+                                   class="btn btn-outline-secondary btn-sm me-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-action="Details" asp-route-id="@entry.EmployeeId"
+                                   class="btn btn-outline-info btn-sm me-2">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@entry.EmployeeId"
+                                   class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+            </table>
+        }
+    </div>
+</div>
