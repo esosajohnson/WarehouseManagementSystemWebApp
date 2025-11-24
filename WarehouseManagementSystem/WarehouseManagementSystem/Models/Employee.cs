@@ -21,7 +21,13 @@ public partial class Employee
 
     public bool IsActive { get; set; }
 
+    public string FullName => $"{FirstName} {LastName}";
+
+    public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; } = new List<GoodsReceipt>();
+
     public virtual ICollection<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
 
-    public string FullName => $"{FirstName} {LastName}";
+    public virtual ICollection<PickingTask> PickingTasks { get; set; } = new List<PickingTask>();
+
+    public virtual ICollection<ReturnTransaction> ReturnTransactions { get; set; } = new List<ReturnTransaction>();
 }

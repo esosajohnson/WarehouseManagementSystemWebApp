@@ -13,5 +13,9 @@ public partial class Location
 
     public string? Shelf { get; set; }
 
+    public virtual ICollection<GoodsReceiptItem> GoodsReceiptItems { get; set; } = new List<GoodsReceiptItem>();
+
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public virtual ICollection<StockLevel> StockLevels { get; set; } = new List<StockLevel>();
 }
