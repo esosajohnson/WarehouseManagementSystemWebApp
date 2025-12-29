@@ -24,6 +24,11 @@ namespace WarehouseManagementSystem.Controllers
             var totalLocations = await _context.Locations.CountAsync();
             var totalEmployees = await _context.Employees.CountAsync();
             var InventoryTransactions = await _context.InventoryTransactions.CountAsync();
+            var PurchaseOrders = await _context.PurchaseOrders.CountAsync();
+            var ReturnTransactions = await _context.ReturnTransactions.CountAsync();
+            var OutboundShipments = await _context.Shipments.CountAsync();
+            var GoodsReceipts = await _context.GoodsReceipts.CountAsync();
+            var StockLevels = await _context.StockLevels.CountAsync();
 
             ViewData["TotalProducts"] = totalProducts;
             ViewData["TotalSuppliers"] = totalSuppliers;
@@ -31,10 +36,14 @@ namespace WarehouseManagementSystem.Controllers
             ViewData["TotalLocations"] = totalLocations;
             ViewData["TotalEmployees"] = totalEmployees;
             ViewData["InventoryTransactions"] = InventoryTransactions;
+            ViewData["PurchaseOrders"] = PurchaseOrders;
+            ViewData["ReturnTransactions"] = ReturnTransactions;
+            ViewData["OutboundShipments"] = OutboundShipments;
+            ViewData["GoodsReceipts"] = GoodsReceipts;
+            ViewData["StockLevels"] = StockLevels;
 
             return View();
         }
-
 
         public IActionResult Privacy()
         {
