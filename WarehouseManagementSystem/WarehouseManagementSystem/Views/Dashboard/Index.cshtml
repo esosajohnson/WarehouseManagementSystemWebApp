@@ -1,76 +1,167 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
-    var lowStock = ViewData["LowStock"] as List<WarehouseManagementSystem.Models.Product>;
-    var recentTransactions = ViewData["RecentTransactions"] as List<WarehouseManagementSystem.Models.InventoryTransaction>;
 }
 
-<h2>📊 Warehouse Dashboard</h2>
+<div class="container-fluid px-4 mt-4">
 
-<div class="row mt-4">
-    <div class="col-md-3">
-        <div class="card bg-light p-3 shadow-sm">
-            <h5>Total Products</h5>
-            <h3>@ViewData["TotalProducts"]</h3>
+    <h2 class="fw-bold text-primary mb-1">
+        <i class="bi bi-speedometer2 me-2"></i>Warehouse Operations Dashboard
+    </h2>
+    <p class="text-muted mb-4">
+        Real-time overview of inventory, orders, and warehouse activity
+    </p>
+
+    <!-- KPI ROW -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Stock Units</h6>
+                    <h2 class="fw-bold">@ViewData["TotalStockUnits"]</h2>
+                    <i class="bi bi-boxes fs-2 text-primary float-end"></i>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card bg-light p-3 shadow-sm">
-            <h5>Total Suppliers</h5>
-            <h3>@ViewData["TotalSuppliers"]</h3>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Inbound (Today)</h6>
+                    <h2 class="fw-bold text-success">@ViewData["InboundToday"]</h2>
+                    <i class="bi bi-arrow-down-square fs-2 text-success float-end"></i>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card bg-light p-3 shadow-sm">
-            <h5>Total Categories</h5>
-            <h3>@ViewData["TotalCategories"]</h3>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Outbound (Today)</h6>
+                    <h2 class="fw-bold text-danger">@ViewData["OutboundToday"]</h2>
+                    <i class="bi bi-arrow-up-square fs-2 text-danger float-end"></i>
+                </div>
+            </div>
         </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Open Purchase Orders</h6>
+                    <h2 class="fw-bold">@ViewData["OpenPurchaseOrders"]</h2>
+                    <i class="bi bi-clipboard-check fs-2 text-warning float-end"></i>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h5 class="fw-semibold mb-3">
+                        <i class="bi bi-arrow-left-right me-2"></i>Inventory Flow (Last 7 Days)
+                    </h5>
+                    <canvas id="inventoryFlowChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALERTS -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h5 class="fw-semibold mb-3 text-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Critical Alerts
+                    </h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            Low Stock Items
+                            <span class="badge bg-danger">@ViewData["LowStockCount"]</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            Pending Shipments
+                            <span class="badge bg-warning">@ViewData["PendingShipments"]</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            Open Picking Tasks
+                            <span class="badge bg-info">@ViewData["OpenPickingTasks"]</span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- RECENT GOODS RECEIPTS -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h5 class="fw-semibold mb-3">Recent Goods Receipts</h5>
+
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Receipt #</th>
+                                <th>Supplier</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var receipt in (IEnumerable<dynamic>)ViewData["RecentGoodsReceipts"])
+                            {
+                                <tr>
+                                    <td>@receipt.ReferenceNumber</td>
+                                    <td>@receipt.SupplierName</td>
+                                    <td>@receipt.ReceiptDate.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECENT SHIPMENTS -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h5 class="fw-semibold mb-3">Recent Shipments</h5>
+
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Tracking</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var shipment in (IEnumerable<dynamic>)ViewData["RecentShipments"])
+                            {
+                                <tr>
+                                    <td>@shipment.TrackingNumber</td>
+                                    <td>
+                                        <span class="badge bg-secondary">@shipment.Status</span>
+                                    </td>
+                                    <td>@shipment.ShipmentDate.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
-<hr />
-
-<h4 class="mt-4">⚠️ Low Stock Products</h4>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>SKU</th>
-            <th>Quantity</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in lowStock)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Sku</td>
-                <td>@product.Quantity</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h4 class="mt-4">🧾 Recent Transactions</h4>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Quantity Change</th>
-            <th>Type</th>
-            <th>Employee</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tx in recentTransactions)
-        {
-            <tr>
-                <td>@tx.Product?.Name</td>
-                <td>@tx.QuantityChanged</td>
-                <td>@tx.TransactionType</td>
-                <td>@(tx.Employee?.FirstName + " " + tx.Employee?.LastName)</td>
-                <td>@tx.TransactionDate.ToShortDateString()</td>
-            </tr>
-        }
-    </tbody>
-</table>
