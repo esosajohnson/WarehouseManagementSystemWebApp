@@ -4,30 +4,30 @@
     ViewData["Title"] = "Product Details";
 }
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header bg-info text-white">
-            <h2>@ViewData["Title"]</h2>
-        </div>
-        <div class="card-body">
-            <dl class="row">
-                <dt class="col-sm-3">Name</dt>
-                <dd class="col-sm-9">@Model.Name</dd>
-                <dt class="col-sm-3">SKU</dt>
-                <dd class="col-sm-9">@Model.Sku</dd>
-                <dt class="col-sm-3">Quantity</dt>
-                <dd class="col-sm-9">@Model.Quantity</dd>
-                <dt class="col-sm-3">Category</dt>
-                <dd class="col-sm-9">@Model.Category?.Name</dd>
-                <dt class="col-sm-3">Location</dt>
-                <dd class="col-sm-9">@Model.Location?.Name</dd>
-                <dt class="col-sm-3">Supplier</dt>
-                <dd class="col-sm-9">@Model.Supplier?.Name</dd>
-            </dl>
-            <div class="d-flex justify-content-between">
-                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-warning">Edit</a>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-            </div>
+<div class="container py-5">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 600px;">
+        <h3 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h3>
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+            <dt class="col-sm-3">SKU</dt>
+            <dd class="col-sm-9">@Model.Sku</dd>
+            <dt class="col-sm-3">Quantity</dt>
+            <dd class="col-sm-9">@Model.Quantity</dd>
+            <dt class="col-sm-3">Category</dt>
+            <dd class="col-sm-9">@Model.Category?.Name</dd>
+            <dt class="col-sm-3">Location</dt>
+            <dd class="col-sm-9">@Model.Location?.Name</dd>
+            <dt class="col-sm-3">Supplier</dt>
+            <dd class="col-sm-9">@Model.Supplier?.Name</dd>
+        </dl>
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary px-4 me-2">
+                <i class="bi bi-pencil-square me-1"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+            </a>
         </div>
     </div>
 </div>
