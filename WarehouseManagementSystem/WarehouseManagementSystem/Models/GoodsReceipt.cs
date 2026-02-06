@@ -19,11 +19,13 @@ public partial class GoodsReceipt
 
     public string? Notes { get; set; }
 
+    public string Status { get; set; } = null!;
+
+    public virtual PurchaseOrder? PurchaseOrder { get; set; }
+
     public virtual Employee? Employee { get; set; }
 
     public virtual ICollection<GoodsReceiptItem> GoodsReceiptItems { get; set; } = new List<GoodsReceiptItem>();
-
-    public virtual PurchaseOrder? PurchaseOrder { get; set; }
 
     public virtual Supplier Supplier { get; set; } = null!;
 }

@@ -134,6 +134,13 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.Notes).HasMaxLength(500);
             entity.Property(e => e.ReceiptDate).HasColumnType("datetime");
             entity.Property(e => e.ReferenceNumber).HasMaxLength(50);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Pending");
+
+            entity.HasOne(d => d.PurchaseOrder).WithMany(p => p.GoodsReceipts)
+                .HasForeignKey(d => d.PurchaseOrderId)
+                .HasConstraintName("FK_GoodsReceipt_PurchaseOrder");
 
             entity.HasOne(d => d.Employee).WithMany(p => p.GoodsReceipts)
                 .HasForeignKey(d => d.EmployeeId)
@@ -264,6 +271,7 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
             entity.Property(e => e.OrderStatus)
                 .HasMaxLength(50)
+                .HasDefaultValue("Created")
                 .IsFixedLength();
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
 
