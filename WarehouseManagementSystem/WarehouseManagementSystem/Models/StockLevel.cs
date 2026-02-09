@@ -11,7 +11,9 @@ public partial class StockLevel
 
     public int LocationId { get; set; }
 
-    public int QuantityChanged { get; set; }
+    public int QuantityOnHand { get; set; }
+
+    public DateTime LastUpdated { get; set; }
 
     public virtual Location Location { get; set; } = null!;
 

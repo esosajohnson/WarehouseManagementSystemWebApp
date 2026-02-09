@@ -19,7 +19,11 @@ public partial class InventoryTransaction
 
     public int? EmployeeId { get; set; }
 
-    public virtual Employee? Employee { get; set; }
+    public int LocationId { get; set; }
 
+    public int ReferenceId { get; set; }
+
+    public virtual Employee? Employee { get; set; }
+    public virtual Location? Location { get; set; }
     public virtual Product Product { get; set; } = null!;
 }

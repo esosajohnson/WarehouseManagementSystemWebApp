@@ -340,6 +340,8 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
         {
             entity.ToTable("StockLevel");
 
+            entity.HasIndex(e => new { e.ProductId, e.LocationId }, "UQ_Product_Location").IsUnique();
+
             entity.HasOne(d => d.Location).WithMany(p => p.StockLevels)
                 .HasForeignKey(d => d.LocationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -349,6 +351,10 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_StockLevel_Product");
+
+            entity.Property(e => e.LastUpdated)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Supplier>(entity =>
