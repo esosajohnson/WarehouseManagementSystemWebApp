@@ -27,8 +27,8 @@ namespace WarehouseManagementSystem.Controllers
             var PurchaseOrders = await _context.PurchaseOrders.CountAsync();
             var ReturnTransactions = await _context.ReturnTransactions.CountAsync();
             var OutboundShipments = await _context.Shipments.CountAsync();
-            var GoodsReceipts = await _context.GoodsReceipts.CountAsync();
             var StockLevels = await _context.StockLevels.CountAsync();
+            var GoodsReceipts = await _context.GoodsReceipts.CountAsync();
 
             ViewData["TotalProducts"] = totalProducts;
             ViewData["TotalSuppliers"] = totalSuppliers;
@@ -36,11 +36,11 @@ namespace WarehouseManagementSystem.Controllers
             ViewData["TotalLocations"] = totalLocations;
             ViewData["TotalEmployees"] = totalEmployees;
             ViewData["InventoryTransactions"] = InventoryTransactions;
-            ViewData["PurchaseOrders"] = PurchaseOrders;
+            ViewData["TotalPurchaseOrders"] = PurchaseOrders;
             ViewData["ReturnTransactions"] = ReturnTransactions;
             ViewData["OutboundShipments"] = OutboundShipments;
-            ViewData["GoodsReceipts"] = GoodsReceipts;
-            ViewData["StockLevels"] = StockLevels;
+            ViewData["TotalStockLevels"] = StockLevels;
+            ViewData["TotalGoodsReceipts"] = GoodsReceipts;
 
             return View();
         }
