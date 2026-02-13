@@ -189,6 +189,8 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
 
             entity.HasIndex(e => e.ProductId, "IX_InventoryTransaction_ProductId");
 
+            entity.HasIndex(e => e.LocationId, "IX_InventoryTransaction_LocationId");
+
             entity.Property(e => e.Notes).HasMaxLength(300);
             entity.Property(e => e.TransactionDate).HasColumnType("datetime");
             entity.Property(e => e.TransactionType).HasMaxLength(50);
@@ -201,6 +203,11 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_InventoryTransaction_Product");
+
+            entity.HasOne(d => d.Location).WithMany(p => p.InventoryTransactions)
+                .HasForeignKey(d => d.LocationId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_InventoryTransaction_Location");
         });
 
         modelBuilder.Entity<Location>(entity =>
