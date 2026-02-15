@@ -42,6 +42,10 @@ namespace WarehouseManagementSystem.Controllers
                 .Include(g => g.Employee)
                 .Include(g => g.PurchaseOrder)
                 .Include(g => g.Supplier)
+                .Include (g => g.GoodsReceiptItems)
+                    .ThenInclude(i => i.Product)
+                .Include (g => g.GoodsReceiptItems)
+                    .ThenInclude(i => i.Location)
                 .FirstOrDefaultAsync(m => m.GoodsReceiptId == id);
             if (goodsReceipt == null)
             {
@@ -52,11 +56,12 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: GoodsReceipts/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
-            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId");
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", null);
+            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", null);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", null);
             return View();
         }
 
@@ -71,13 +76,14 @@ namespace WarehouseManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", goodsReceipt.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", goodsReceipt.EmployeeId);
             ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", goodsReceipt.PurchaseOrderId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", goodsReceipt.SupplierId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", goodsReceipt.SupplierId);
             return View(goodsReceipt);
         }
 
         // GET: GoodsReceipts/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,9 +96,9 @@ namespace WarehouseManagementSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", goodsReceipt.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", goodsReceipt.EmployeeId);
             ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", goodsReceipt.PurchaseOrderId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", goodsReceipt.SupplierId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", goodsReceipt.SupplierId);
             return View(goodsReceipt);
         }
 
@@ -133,6 +139,7 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: GoodsReceipts/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
