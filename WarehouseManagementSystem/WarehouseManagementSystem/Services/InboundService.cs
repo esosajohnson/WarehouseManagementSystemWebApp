@@ -69,19 +69,20 @@ namespace WarehouseManagementSystem.Services
                 {
                     ProductId = item.ProductId,
                     LocationId = item.LocationId,
-                    QuantityChanged = item.QuantityReceived
+                    QuantityOnHand = item.QuantityReceived
                 };
                 _context.StockLevels.Add(stock);
             }
             else
             {
-                stock.QuantityChanged += item.QuantityReceived;
+                stock.QuantityOnHand += item.QuantityReceived;
                 _context.StockLevels.Update(stock);
             }
 
             _context.InventoryTransactions.Add(new InventoryTransaction
             {
                 ProductId = item.ProductId,
+                LocationId = item.LocationId,
                 QuantityChanged = item.QuantityReceived,
                 TransactionType = "Inbound",
                 TransactionDate = DateTime.UtcNow,
