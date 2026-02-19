@@ -17,7 +17,7 @@ public partial class PurchaseOrderItem
 
     public decimal LineTotal { get; set; }
 
-    public virtual Product Product { get; set; } = null!;
+    public virtual Product? Product { get; set; }
 
-    public virtual PurchaseOrder PurchaseOrder { get; set; } = null!;
+    public virtual PurchaseOrder? PurchaseOrder { get; set; }
 }

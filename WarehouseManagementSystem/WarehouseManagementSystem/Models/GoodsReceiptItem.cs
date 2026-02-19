@@ -19,9 +19,9 @@ public partial class GoodsReceiptItem
 
     public string? Notes { get; set; }
 
-    public virtual GoodsReceipt GoodsReceipt { get; set; } = null!;
+    public virtual GoodsReceipt? GoodsReceipt { get; set; }
 
-    public virtual Location Location { get; set; } = null!;
+    public virtual Location? Location { get; set; }
 
-    public virtual Product Product { get; set; } = null!;
+    public virtual Product? Product { get; set; }
 }
