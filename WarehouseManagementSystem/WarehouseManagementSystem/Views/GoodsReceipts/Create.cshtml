@@ -4,50 +4,70 @@
     ViewData["Title"] = "Create Goods Receipt";
 }
 
-<h1>Create</h1>
+<div class="container py-5">
+    <div class="card shadow-sm p-4 border-0 rounded-4 mx-auto" style="max-width: 800px;">
+        
+        <h2 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h2>
 
-<h4>GoodsReceipt</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PurchaseOrderId" class="control-label"></label>
-                <select asp-for="PurchaseOrderId" class="form-control" asp-items="ViewBag.PurchaseOrderId"></select>
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="PurchaseOrderId" class="form-label fw-semibold">Purchase Order ID</label>
+                <select asp-for="PurchaseOrderId" class="form-control" asp-items="ViewBag.PurchaseOrderId">
+                    <option value="">-- Select Purchase Order --</option>
+                </select>
+                <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SupplierId" class="control-label"></label>
-                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+            <div class="mb-3">
+                <label asp-for="SupplierId" class="control-label fw-semibold">Supplier</label>
+                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
+                    <option value="">Please select a supplier</option>
+                </select>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="EmployeeId" class="control-label"></label>
-                <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+            <div class="mb-3">
+                <label asp-for="EmployeeId" class="form-label fw-semibold">Employee ID</label>
+                <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId">
+                    <option value="">-- Select Employee --</option>
+                </select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ReceiptDate" class="control-label"></label>
-                <input asp-for="ReceiptDate" class="form-control" />
+            <div class="mb-3">
+                <label asp-for="ReceiptDate" class="form-label fw-semibold">Receipt Date</label>
+                <input asp-for="ReceiptDate" class="form-control" type="date" />
                 <span asp-validation-for="ReceiptDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ReferenceNumber" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="ReferenceNumber" class="form-label fw-semibold">Reference Number</label>
                 <input asp-for="ReferenceNumber" class="form-control" />
                 <span asp-validation-for="ReferenceNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
-                <input asp-for="Notes" class="form-control" />
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label fw-semibold">Status</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Received">Received</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label fw-semibold">Notes</label>
+                <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
+            <button type="submit" class="btn btn-primary px-4">
+                <i class="bi bi-plus-circle me-1"></i> Create
+            </button>
+            <button type="reset" class="btn btn-info ms-2 px-4">
+                <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+            </button>
+            <a asp-action="Index" class="btn btn-secondary ms-2 px-4">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+            </a>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
