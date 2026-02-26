@@ -22,17 +22,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control" id="Quantity" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UnitCost" class="control-label"></label>
-                <input asp-for="UnitCost" class="form-control" />
+                <input asp-for="UnitCost" class="form-control" id="UnitCost" />
                 <span asp-validation-for="UnitCost" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LineTotal" class="control-label"></label>
-                <input asp-for="LineTotal" class="form-control" />
+                <input type="text" id="LineTotalDisplay" class="form-control" readonly />
                 <span asp-validation-for="LineTotal" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,4 +48,15 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function calculateLineTotal() {
+            var quantity = parseFloat(document.getElementById('Quantity').value) || 0;
+            var unitCost = parseFloat(document.getElementById('UnitCost').value) || 0;
+            var lineTotal = quantity * unitCost;
+            document.getElementById('LineTotalDisplay').value = lineTotal.toFixed(2);
+        }
+        document.getElementById('Quantity').addEventListener('input', calculateLineTotal);
+        document.getElementById('UnitCost').addEventListener('input', calculateLineTotal);
+    </script>
 }

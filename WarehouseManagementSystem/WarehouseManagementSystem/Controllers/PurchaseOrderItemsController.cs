@@ -58,10 +58,12 @@ namespace WarehouseManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseOrderItemId,PurchaseOrderId,ProductId,Quantity,UnitCost,LineTotal")] PurchaseOrderItem purchaseOrderItem)
+        public async Task<IActionResult> Create([Bind("PurchaseOrderItemId,PurchaseOrderId,ProductId,Quantity,UnitCost")] PurchaseOrderItem purchaseOrderItem)
         {
             if (ModelState.IsValid)
             {
+                purchaseOrderItem.LineTotal = purchaseOrderItem.Quantity * purchaseOrderItem.UnitCost;
+
                 _context.Add(purchaseOrderItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +96,7 @@ namespace WarehouseManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PurchaseOrderItemId,PurchaseOrderId,ProductId,Quantity,UnitCost,LineTotal")] PurchaseOrderItem purchaseOrderItem)
+        public async Task<IActionResult> Edit(int id, [Bind("PurchaseOrderItemId,PurchaseOrderId,ProductId,Quantity,UnitCost")] PurchaseOrderItem purchaseOrderItem)
         {
             if (id != purchaseOrderItem.PurchaseOrderItemId)
             {
@@ -105,6 +107,8 @@ namespace WarehouseManagementSystem.Controllers
             {
                 try
                 {
+                    purchaseOrderItem.LineTotal = purchaseOrderItem.Quantity * purchaseOrderItem.UnitCost;
+
                     _context.Update(purchaseOrderItem);
                     await _context.SaveChangesAsync();
                 }
