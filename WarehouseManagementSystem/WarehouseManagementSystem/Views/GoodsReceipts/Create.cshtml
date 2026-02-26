@@ -14,7 +14,7 @@
             <div class="mb-3">
                 <label asp-for="PurchaseOrderId" class="form-label fw-semibold">Purchase Order ID</label>
                 <select asp-for="PurchaseOrderId" class="form-control" asp-items="ViewBag.PurchaseOrderId">
-                    <option value="">-- Select Purchase Order --</option>
+                    <option value="">Please select a purchase order</option>
                 </select>
                 <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
             </div>
@@ -28,7 +28,7 @@
             <div class="mb-3">
                 <label asp-for="EmployeeId" class="form-label fw-semibold">Employee ID</label>
                 <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId">
-                    <option value="">-- Select Employee --</option>
+                    <option value="">Please select an employee</option>
                 </select>
                 <span asp-validation-for="EmployeeId" class="text-danger"></span>
             </div>
@@ -45,7 +45,7 @@
             <div class="mb-3">
                 <label asp-for="Status" class="form-label fw-semibold">Status</label>
                 <select asp-for="Status" class="form-control">
-                    <option value="">-- Select Status --</option>
+                    <option value="">Select Status</option>
                     <option value="Pending">Pending</option>
                     <option value="Received">Received</option>
                 </select>
