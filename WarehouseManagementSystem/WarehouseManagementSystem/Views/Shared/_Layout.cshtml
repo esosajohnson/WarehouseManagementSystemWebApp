@@ -12,45 +12,127 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WarehouseManagementSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserManagement" asp-action="Index">User Management</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+    <div class="d-flex">
+        <nav class="sidebar">
+
+            <div class="sidebar-header">
+                <h4>WMS</h4>
             </div>
+
+            <ul class="nav flex-column">
+
+                <!-- Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")"
+                       asp-controller="Dashboard" asp-action="Index">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- USER MANAGEMENT -->
+                <li class="sidebar-section">User Management</li>
+
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "UserManagement" ? "active" : "")"
+                       asp-controller="UserManagement" asp-action="Index">
+                        <i class="bi bi-people"></i>
+                        <span>Manage Users</span>
+                    </a>
+                </li>
+
+                <!-- INBOUND -->
+                <li class="sidebar-section">Inbound</li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle="collapse"
+                       href="#inboundMenu">
+                        <i class="bi bi-box-arrow-in-down"></i>
+                        <span>Inbound</span>
+                        <i class="bi bi-chevron-down dropdown-icon"></i>
+                    </a>
+
+                    <div class="collapse" id="inboundMenu">
+                        <ul class="nav flex-column submenu">
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="PurchaseOrders" asp-action="Index">
+                                    Purchase Orders
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="GoodsReceipts" asp-action="Index">
+                                    Goods Receipts
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- INVENTORY -->
+                <li class="sidebar-section">Inventory</li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle="collapse"
+                       href="#inventoryMenu">
+                        <i class="bi bi-box-seam"></i>
+                        <span>Inventory</span>
+                        <i class="bi bi-chevron-down dropdown-icon"></i>
+                    </a>
+
+                    <div class="collapse" id="inventoryMenu">
+                        <ul class="nav flex-column submenu">
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Products" asp-action="Index">
+                                    Products
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Locations" asp-action="Index">
+                                    Locations
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Inventory" asp-action="Stock">
+                                    Stock Overview
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="sidebar-footer">
+                <partial name="_LoginPartial" />
+            </div>
+
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+        <div class="main-content flex-grow-1 p-4">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+
+            <footer class="border-top text-muted mt-5 pt-3">
+                <div class="container">
+                    &copy; 2025 - WarehouseManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - WarehouseManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
