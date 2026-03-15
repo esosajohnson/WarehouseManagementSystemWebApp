@@ -11,37 +11,37 @@
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="SupplierId" class="form-label">Supplier</label>
+                <label asp-for="SupplierId" class="form-label fw-semibold">Supplier</label>
                 <select asp-for="SupplierId" class="form-select" asp-items="ViewBag.SupplierId">
-                    <option value="">-- Select Supplier --</option>
+                    <option value="">Select Supplier</option>
                 </select>
                 <span asp-validation-for="SupplierId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="OrderDate" class="form-label">Order Date</label>
+                <label asp-for="OrderDate" class="form-label fw-semibold">Order Date</label>
                 <input asp-for="OrderDate" class="form-control"/>
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="OrderStatus" class="form-label">Order Status</label>
+                <label asp-for="OrderStatus" class="form-label fw-semibold">Order Status</label>
                 <select asp-for="OrderStatus" class="form-select">
-                    <option value="">-- Select Status --</option>
+                    <option value="">Select Status</option>
                     <option value="Pending">Pending</option>
                     <option value="Received">Received</option>
                 </select>
             </div>
             <div class="mb-3">
-                <label asp-for="ExpectedDate" class="form-label">Expected Date</label>
+                <label asp-for="ExpectedDate" class="form-label fw-semibold">Expected Date</label>
                 <input asp-for="ExpectedDate" class="form-control"/>
                 <span asp-validation-for="ExpectedDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="TotalAmount" class="control-label"></label>
+                <label asp-for="TotalAmount" class="control-label fw-semibold">Total Amount</label>
                 <input asp-for="TotalAmount" class="form-control" />
                 <span asp-validation-for="TotalAmount" class="text-danger"></span>
             </div>
             <div class="form-group mb-4">
-                <label asp-for="Notes" class="control-label"></label>
+                <label asp-for="Notes" class="control-label fw-semibold"></label>
                 <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>

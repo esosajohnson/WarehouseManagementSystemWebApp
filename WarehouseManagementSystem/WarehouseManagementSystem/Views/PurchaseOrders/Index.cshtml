@@ -1,65 +1,92 @@
 ﻿@model IEnumerable<WarehouseManagementSystem.Models.PurchaseOrder>
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Purchase Orders";
 }
 
-<h1>Index</h1>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary fw-semibold">@ViewData["Title"]</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary px-4">
+                <i class="bi bi-plus-circle me-1"></i> Create Purchase Order
+            </a>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpectedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Supplier)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpectedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Supplier.SupplierId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PurchaseOrderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-12">
+            <p class="text-muted">Manage the purchase orders to view details and manage items.</p>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-4">
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-inbox-fill display-4 text-muted mb-3"></i>
+                <h4 class="text-muted">No Purchase Orders Found</h4>
+                <p class="text-muted">Click the button above to create your first purchase order.</p>
+                <a asp-action="Create" class="btn btn-primary mt-3">
+                    <i class="bi bi-plus-circle me-1"></i> Create Purchase Order
+                </a>
+            </div>
+        }
+        else
+        {
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Order Date</th>
+                        <th>Expected Date</th>
+                        <th>Status</th>
+                        <th>Total Amount</th>
+                        <th>Supplier</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OrderDate.ToShortDateString()</td>
+                            <td>@item.ExpectedDate?.ToShortDateString()</td>
+                            <td>@item.OrderStatus</td>
+                            <td>@item.TotalAmount.ToString("C")</td>
+                            <td>@item.Supplier?.Name</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.PurchaseOrderId" 
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye-fill me-1"></i> View
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId" 
+                                    class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-pencil-fill me-1"></i> Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId" 
+                                    class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash-fill me-1"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
