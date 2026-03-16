@@ -46,11 +46,15 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: PurchaseOrderItems/Create
-        public IActionResult Create()
+        public IActionResult Create(int purchaseOrderId)
         {
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
-            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId");
-            return View();
+
+            var item = new PurchaseOrderItem
+            {
+                PurchaseOrderId = purchaseOrderId
+            };
+            return View(item);
         }
 
         // POST: PurchaseOrderItems/Create
