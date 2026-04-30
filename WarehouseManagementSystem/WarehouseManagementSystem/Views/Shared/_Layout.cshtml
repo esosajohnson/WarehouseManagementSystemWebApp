@@ -3,139 +3,258 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WarehouseManagementSystem</title>
+    <title>@ViewData["Title"] - WMS</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WarehouseManagementSystem.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
 </head>
 <body>
     <div class="d-flex">
-        <nav class="sidebar">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="sidebar" id="sidebar">
 
             <div class="sidebar-header">
-                <h4>WMS</h4>
+                <div class="sidebar-logo">
+                    <i class="bi bi-building-fill-gear"></i>
+                    <span class="sidebar-logo-text">WMS</span>
+                </div>
+                <div class="sidebar-subtitle">Warehouse Management</div>
             </div>
 
-            <ul class="nav flex-column">
+            <ul class="nav flex-column sidebar-nav">
 
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")"
-                       asp-controller="Dashboard" asp-action="Index">
+                           asp-controller="Dashboard" asp-action="Index">
                         <i class="bi bi-speedometer2"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <!-- USER MANAGEMENT -->
-                <li class="sidebar-section">User Management</li>
+                <!-- ── USER MANAGEMENT ── -->
+                <li class="sidebar-section">
+                    <span>User Management</span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Employees" ? "active" : "")"
+                           asp-controller="Employees" asp-action="Index">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Employees</span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "UserManagement" ? "active" : "")"
-                       asp-controller="UserManagement" asp-action="Index">
+                           asp-controller="UserManagement" asp-action="Index">
                         <i class="bi bi-people"></i>
                         <span>Manage Users</span>
                     </a>
                 </li>
 
-                <!-- INBOUND -->
-                <li class="sidebar-section">Inbound</li>
+                <!-- ── INBOUND ── -->
+                <li class="sidebar-section">
+                    <span>Inbound</span>
+                </li>
+
+                @{
+                    var inboundControllers = new[] { "PurchaseOrders", "GoodsReceipts", "Suppliers" };
+                    var inboundActive = inboundControllers.Contains(ViewContext.RouteData.Values["controller"]?.ToString());
+                }
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle="collapse"
-                       href="#inboundMenu">
+                    <a class="nav-link submenu-toggle @(inboundActive ? "active-parent" : "")"
+                           data-bs-toggle="collapse"
+                           href="#inboundMenu"
+                           aria-expanded="@(inboundActive ? "true" : "false")">
                         <i class="bi bi-box-arrow-in-down"></i>
                         <span>Inbound</span>
                         <i class="bi bi-chevron-down dropdown-icon"></i>
                     </a>
-
-                    <div class="collapse" id="inboundMenu">
+                    <div class="collapse @(inboundActive ? "show" : "")" id="inboundMenu">
                         <ul class="nav flex-column submenu">
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   asp-controller="PurchaseOrders" asp-action="Index">
-                                    Purchase Orders
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Suppliers" ? "active" : "")"
+                                       asp-controller="Suppliers" asp-action="Index">
+                                    <i class="bi bi-truck"></i> Suppliers
                                 </a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   asp-controller="GoodsReceipts" asp-action="Index">
-                                    Goods Receipts
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "PurchaseOrders" ? "active" : "")"
+                                       asp-controller="PurchaseOrders" asp-action="Index">
+                                    <i class="bi bi-file-earmark-text"></i> Purchase Orders
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "GoodsReceipts" ? "active" : "")"
+                                       asp-controller="GoodsReceipts" asp-action="Index">
+                                    <i class="bi bi-clipboard-check"></i> Goods Receipts
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- INVENTORY -->
-                <li class="sidebar-section">Inventory</li>
+                <!-- ── INVENTORY ── -->
+                <li class="sidebar-section">
+                    <span>Inventory</span>
+                </li>
+
+                @{
+                    var inventoryControllers = new[] { "Products", "Categories", "Locations", "Inventory", "StockLevels", "InventoryTransactions" };
+                    var inventoryActive = inventoryControllers.Contains(ViewContext.RouteData.Values["controller"]?.ToString());
+                }
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle="collapse"
-                       href="#inventoryMenu">
+                    <a class="nav-link submenu-toggle @(inventoryActive ? "active-parent" : "")"
+                           data-bs-toggle="collapse"
+                           href="#inventoryMenu"
+                           aria-expanded="@(inventoryActive ? "true" : "false")">
                         <i class="bi bi-box-seam"></i>
                         <span>Inventory</span>
                         <i class="bi bi-chevron-down dropdown-icon"></i>
                     </a>
-
-                    <div class="collapse" id="inventoryMenu">
+                    <div class="collapse @(inventoryActive ? "show" : "")" id="inventoryMenu">
                         <ul class="nav flex-column submenu">
-
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   asp-controller="Products" asp-action="Index">
-                                    Products
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")"
+                                       asp-controller="Products" asp-action="Index">
+                                    <i class="bi bi-archive"></i> Products
                                 </a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   asp-controller="Locations" asp-action="Index">
-                                    Locations
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Categories" ? "active" : "")"
+                                       asp-controller="Categories" asp-action="Index">
+                                    <i class="bi bi-tag"></i> Categories
                                 </a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   asp-controller="Inventory" asp-action="Stock">
-                                    Stock Overview
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Locations" ? "active" : "")"
+                                       asp-controller="Locations" asp-action="Index">
+                                    <i class="bi bi-geo-alt"></i> Locations
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Inventory" ? "active" : "")"
+                                       asp-controller="Inventory" asp-action="Stock">
+                                    <i class="bi bi-bar-chart"></i> Stock Overview
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "InventoryTransactions" ? "active" : "")"
+                                       asp-controller="InventoryTransactions" asp-action="Index">
+                                    <i class="bi bi-arrow-left-right"></i> Transactions
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
+                <!-- ── OUTBOUND ── -->
+                <li class="sidebar-section">
+                    <span>Outbound</span>
+                </li>
+
+                @{
+                    var outboundControllers = new[] { "Shipments", "ReturnTransactions" };
+                    var outboundActive = outboundControllers.Contains(ViewContext.RouteData.Values["controller"]?.ToString());
+                }
+
+                <li class="nav-item">
+                    <a class="nav-link submenu-toggle @(outboundActive ? "active-parent" : "")"
+                           data-bs-toggle="collapse"
+                           href="#outboundMenu"
+                           aria-expanded="@(outboundActive ? "true" : "false")">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        <span>Outbound</span>
+                        <i class="bi bi-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="collapse @(outboundActive ? "show" : "")" id="outboundMenu">
+                        <ul class="nav flex-column submenu">
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Shipments" ? "active" : "")"
+                                       asp-controller="Shipments" asp-action="Index">
+                                    <i class="bi bi-send"></i> Shipments
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "ReturnTransactions" ? "active" : "")"
+                                       asp-controller="ReturnTransactions" asp-action="Index">
+                                    <i class="bi bi-arrow-return-left"></i> Returns
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
 
             </ul>
 
+            <!-- Sidebar Footer -->
             <div class="sidebar-footer">
-                <partial name="_LoginPartial" />
+                <div class="sidebar-footer-user">
+                    <partial name="_LoginPartial" />
+                </div>
             </div>
 
         </nav>
 
-        <div class="main-content flex-grow-1 p-4">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="main-content flex-grow-1">
 
-            <footer class="border-top text-muted mt-5 pt-3">
-                <div class="container">
-                    &copy; 2025 - WarehouseManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <!-- Top bar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <span class="topbar-title">@(ViewData["Title"] ?? "Dashboard")</span>
                 </div>
-            </footer>
+                <div class="topbar-right">
+                    <span class="topbar-date">
+                        <i class="bi bi-calendar3"></i>
+                        @DateTime.Now.ToString("dddd, dd MMM yyyy")
+                    </span>
+                </div>
+            </div>
+
+            <!-- Page content -->
+            <div class="page-content">
+                <main role="main">
+                    @RenderBody()
+                </main>
+
+                <footer class="page-footer">
+                    &copy; @DateTime.Now.Year WarehouseManagementSystem &mdash;
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </footer>
+            </div>
         </div>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+            // Rotate chevron when submenu is open/closed
+            document.querySelectorAll('.submenu-toggle').forEach(toggle => {
+                const targetId = toggle.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (!target) return;
+
+                const icon = toggle.querySelector('.dropdown-icon');
+
+                // Set initial state
+                if (target.classList.contains('show')) {
+                    icon?.classList.add('rotated');
+                }
+
+                target.addEventListener('show.bs.collapse', () => icon?.classList.add('rotated'));
+                target.addEventListener('hide.bs.collapse', () => icon?.classList.remove('rotated'));
+            });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
