@@ -48,8 +48,8 @@ namespace WarehouseManagementSystem.Controllers
         // GET: StockLevels/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId");
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "Name");
             return View();
         }
 

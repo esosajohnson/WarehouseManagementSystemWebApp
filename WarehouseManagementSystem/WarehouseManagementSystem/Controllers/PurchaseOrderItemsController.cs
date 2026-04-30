@@ -48,7 +48,7 @@ namespace WarehouseManagementSystem.Controllers
         // GET: PurchaseOrderItems/Create
         public IActionResult Create(int purchaseOrderId)
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "Name");
 
             var item = new PurchaseOrderItem
             {
