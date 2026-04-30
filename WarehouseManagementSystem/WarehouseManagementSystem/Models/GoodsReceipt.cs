@@ -19,7 +19,7 @@ public partial class GoodsReceipt
 
     public string? Notes { get; set; }
 
-    public string Status { get; set; } = null!;
+    public GoodsReceiptStatus Status { get; set; } = GoodsReceiptStatus.Pending;
 
     public virtual PurchaseOrder? PurchaseOrder { get; set; }
 

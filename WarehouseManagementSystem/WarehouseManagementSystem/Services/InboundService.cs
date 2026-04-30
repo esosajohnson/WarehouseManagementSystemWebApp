@@ -25,7 +25,7 @@ namespace WarehouseManagementSystem.Services
                 if (receipt == null)
                     throw new Exception("Goods receipt not found.");
 
-                if (receipt.Status == "Received")
+                if (receipt.Status == GoodsReceiptStatus.Received)
                     throw new Exception("Goods receipt has already been processed.");
 
                 foreach (var item in receipt.GoodsReceiptItems)
@@ -42,7 +42,7 @@ namespace WarehouseManagementSystem.Services
                         _context.PurchaseOrders.Update(po);
                     }
 
-                    receipt.Status = "Received";
+                    receipt.Status = GoodsReceiptStatus.Received;
 
                     await _context.SaveChangesAsync();
                     await transaction.CommitAsync();

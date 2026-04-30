@@ -131,8 +131,9 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.ReceiptDate).HasColumnType("datetime");
             entity.Property(e => e.ReferenceNumber).HasMaxLength(50);
             entity.Property(e => e.Status)
+                .HasConversion<string>()
                 .HasMaxLength(50)
-                .HasDefaultValue("Pending");
+                .HasDefaultValue(GoodsReceiptStatus.Pending);
 
             entity.HasOne(d => d.PurchaseOrder).WithMany(p => p.GoodsReceipts)
                 .HasForeignKey(d => d.PurchaseOrderId)

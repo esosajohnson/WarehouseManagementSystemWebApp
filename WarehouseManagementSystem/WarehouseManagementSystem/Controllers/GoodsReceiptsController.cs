@@ -92,7 +92,7 @@ namespace WarehouseManagementSystem.Controllers
             var goodsReceipt = await _context.GoodsReceipts.FindAsync(id);
             if (goodsReceipt == null) return NotFound();
 
-            if (goodsReceipt.Status == "Received")
+            if (goodsReceipt.Status == GoodsReceiptStatus.Received)
             {
                 TempData["ErrorMessage"] = "Cannot edit a goods receipt that has already been received.";
                 return RedirectToAction(nameof(Index));
@@ -159,7 +159,7 @@ namespace WarehouseManagementSystem.Controllers
                 return NotFound();
             }
 
-            if (goodsReceipt.Status == "Received")
+            if (goodsReceipt.Status == GoodsReceiptStatus.Received)
             {
                 TempData["ErrorMessage"] = "Cannot delete a goods receipt that has already been received.";
                 return RedirectToAction(nameof(Index));
@@ -179,7 +179,7 @@ namespace WarehouseManagementSystem.Controllers
                 _context.GoodsReceipts.Remove(goodsReceipt);
             }
 
-            if (goodsReceipt.Status == "Received")
+            if (goodsReceipt.Status == GoodsReceiptStatus.Received)
             {
                 TempData["ErrorMessage"] = "Cannot delete a goods receipt that has already been received.";
                 return RedirectToAction(nameof(Index));

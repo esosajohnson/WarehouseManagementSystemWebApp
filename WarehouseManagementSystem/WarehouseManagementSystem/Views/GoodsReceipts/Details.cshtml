@@ -24,7 +24,7 @@
             <dd class="col-sm-9">@Model.Supplier?.Name</dd>
         </dl>
         <div class="mt-4">
-            @if (Model.Status != "Received")
+            @if (Model.Status != GoodsReceiptStatus.Received)
             {
                 <a asp-controller="GoodsReceiptItems"
                    asp-action="Create"
@@ -56,7 +56,7 @@
                         <th>Product</th>
                         <th>Quantity Received</th>
                         <th>Location</th>
-                        @if (Model.Status != "Received")
+                        @if (Model.Status != GoodsReceiptStatus.Received)
                         {
                             <th>Actions</th>
                         }
@@ -70,7 +70,7 @@
                             <td>@item.Product?.Name</td>
                             <td>@item.QuantityReceived</td>
                             <td>@item.Location?.Name</td>
-                            @if (Model.Status != "Received")
+                            @if (Model.Status != GoodsReceiptStatus.Received)
                             {
                                 <td>
                                     <a asp-controller="GoodsReceiptItems"
