@@ -60,7 +60,8 @@ namespace WarehouseManagementSystem.Controllers
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", null);
-            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", null);
+            ViewData["PurchaseOrderId"] = new SelectList
+                (_context.PurchaseOrders.Where(p => p.OrderStatus == "Approved" || p.OrderStatus == "PartiallyReceived"), "PurchaseOrderId", "PurchaseOrderId", null);
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", null);
             return View();
         }
@@ -86,16 +87,17 @@ namespace WarehouseManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var goodsReceipt = await _context.GoodsReceipts.FindAsync(id);
-            if (goodsReceipt == null)
+            if (goodsReceipt == null) return NotFound();
+
+            if (goodsReceipt.Status == "Received")
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Cannot edit a goods receipt that has already been received.";
+                return RedirectToAction(nameof(Index));
             }
+
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", goodsReceipt.EmployeeId);
             ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", goodsReceipt.PurchaseOrderId);
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", goodsReceipt.SupplierId);
@@ -157,6 +159,12 @@ namespace WarehouseManagementSystem.Controllers
                 return NotFound();
             }
 
+            if (goodsReceipt.Status == "Received")
+            {
+                TempData["ErrorMessage"] = "Cannot delete a goods receipt that has already been received.";
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(goodsReceipt);
         }
 
@@ -171,15 +179,35 @@ namespace WarehouseManagementSystem.Controllers
                 _context.GoodsReceipts.Remove(goodsReceipt);
             }
 
+            if (goodsReceipt.Status == "Received")
+            {
+                TempData["ErrorMessage"] = "Cannot delete a goods receipt that has already been received.";
+                return RedirectToAction(nameof(Index));
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Receive(int id)
         {
-            await _inboundService.ReceiveGoodsAsync(id);
+            try
+            {
+                await _inboundService.ReceiveGoodsAsync(id);
+                TempData["SuccessMessage"] = "Goods receipt processed successfully.";
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = $"Error processing goods receipt: {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"An unexpected error occurred: {ex.Message}";
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
