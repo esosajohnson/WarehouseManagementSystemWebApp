@@ -46,10 +46,6 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=WarehouseDB;Trusted_Connection=True;TrustServerCertificate=True");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
@@ -145,10 +141,6 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
             entity.HasOne(d => d.Employee).WithMany(p => p.GoodsReceipts)
                 .HasForeignKey(d => d.EmployeeId)
                 .HasConstraintName("FK_GoodsReceipt_Employee");
-
-            entity.HasOne(d => d.PurchaseOrder).WithMany(p => p.GoodsReceipts)
-                .HasForeignKey(d => d.PurchaseOrderId)
-                .HasConstraintName("FK_GoodsReceipt_PurchaseOrder");
 
             entity.HasOne(d => d.Supplier).WithMany(p => p.GoodsReceipts)
                 .HasForeignKey(d => d.SupplierId)
