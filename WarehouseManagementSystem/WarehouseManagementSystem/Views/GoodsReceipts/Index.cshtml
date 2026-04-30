@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WarehouseManagementSystem.Models.GoodsReceipt>
+﻿@using WarehouseManagementSystem.Models;
+@model IEnumerable<WarehouseManagementSystem.Models.GoodsReceipt>
 
 @{
     ViewData["Title"] = "Goods Receipts";
@@ -60,7 +61,7 @@
                             <th>Reference Number</th>
                             <th>Status</th>
                             <th>Notes</th>
-                            <th style="min-width: 220px;">Actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,24 +74,46 @@
                                 <td>@entry.Employee?.FullName</td>
                                 <td>@entry.ReceiptDate.ToShortDateString()</td>
                                 <td>@entry.ReferenceNumber</td>
-                                <td>@entry.Status</td>
+                                <td>
+                                    @switch (entry.Status)
+                                    {
+                                        case WarehouseManagementSystem.Models.GoodsReceiptStatus.Pending:
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="bi bi-hour glass-split me-1"></i> Pending
+                                            </span>
+                                            break;
+                                        case WarehouseManagementSystem.Models.GoodsReceiptStatus.Received:
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-check-circle-fill me-1"></i> Received
+                                            </span>
+                                            break;
+                                        case WarehouseManagementSystem.Models.GoodsReceiptStatus.Cancelled:
+                                            <span class="badge bg-danger">
+                                                <i class="bi bi-x-circle-fill me-1"></i> Cancelled
+                                            </span>
+                                            break;
+                                    }
+                                </td>
                                 <td>@entry.Notes</td>
                                 <td>
-                                    <div class="d-flex gap-2 flex-wrap">
+                                    <div class="d-flex align-items-center gap-2">
                                         <a asp-action="Edit" asp-route-id="@entry.GoodsReceiptId"
-                                           class="btn btn-outline-secondary btn-sm">
+                                               class="btn btn-outline-secondary btn-sm">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
                                         <a asp-action="Details" asp-route-id="@entry.GoodsReceiptId"
-                                           class="btn btn-outline-info btn-sm">
+                                               class="btn btn-outline-info btn-sm">
                                             <i class="bi bi-eye-fill"></i> Details
                                         </a>
                                         <a asp-action="Delete" asp-route-id="@entry.GoodsReceiptId"
-                                           class="btn btn-outline-danger btn-sm">
+                                               class="btn btn-outline-danger btn-sm">
                                             <i class="bi bi-trash-fill"></i> Delete
                                         </a>
-                                        <form asp-action="Receive" asp-route-id="@entry.GoodsReceiptId" method="post" class="d-inline">
-                                            <button class="btn btn-success btn-sm" @(entry.Status == "Received" ? "disabled" : "")>
+                                        <form asp-action="Receive" asp-route-id="@entry.GoodsReceiptId"
+                                              method="post" class="m-0 p-0 d-flex">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-success btn-sm"
+                                                @(entry.Status == GoodsReceiptStatus.Received ? "disabled" : "")>
                                                 <i class="bi bi-check-circle-fill me-1"></i> Mark as Received
                                             </button>
                                         </form>
