@@ -173,5 +173,17 @@ namespace WarehouseManagementSystem.Controllers
         {
             return _context.PurchaseOrderItems.Any(e => e.PurchaseOrderItemId == id);
         }
+
+        private void PopulateDropDowns()
+        {
+            var eligiblePOs = _context.PurchaseOrders
+                .Where(p => p.OrderStatus == PurchaseOrderStatus.Approved 
+                        || p.OrderStatus == PurchaseOrderStatus.PartiallyReceived)
+                .Select(p => new 
+                { 
+                    p.PurchaseOrderId,
+                    Display = "PO #" + p.PurchaseOrderId + " - " + p.Supplier.Name + " (" + p.OrderStatus + ")"
+                });
+        }
     }
 }

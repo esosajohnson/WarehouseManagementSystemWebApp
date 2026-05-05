@@ -270,8 +270,9 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .IsFixedLength();
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
             entity.Property(e => e.OrderStatus)
+                .HasConversion<string>()
                 .HasMaxLength(50)
-                .HasDefaultValue("Created")
+                .HasDefaultValue(PurchaseOrderStatus.Draft)
                 .IsFixedLength();
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
 

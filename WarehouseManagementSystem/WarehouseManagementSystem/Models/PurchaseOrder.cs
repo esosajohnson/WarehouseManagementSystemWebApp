@@ -13,7 +13,7 @@ public partial class PurchaseOrder
 
     public DateTime? ExpectedDate { get; set; }
 
-    public string OrderStatus { get; set; } = null!;
+    public PurchaseOrderStatus OrderStatus { get; set; } = PurchaseOrderStatus.Draft;
 
     public decimal TotalAmount { get; set; }
 
