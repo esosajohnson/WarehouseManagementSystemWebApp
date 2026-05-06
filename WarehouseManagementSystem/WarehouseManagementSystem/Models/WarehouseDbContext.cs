@@ -41,6 +41,7 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<ReturnTransaction> ReturnTransactions { get; set; }
 
     public virtual DbSet<Shipment> Shipments { get; set; }
+    public virtual DbSet<ShipmentItem> ShipmentItems { get; set; }
 
     public virtual DbSet<StockLevel> StockLevels { get; set; }
 
@@ -335,6 +336,37 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .HasMaxLength(50)
                 .HasDefaultValue("Pending");
             entity.Property(e => e.TrackingNumber).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<ShipmentItem>(entity =>
+        {
+            entity.HasKey(e => e.ShipmentItemId);
+
+            entity.ToTable("ShipmentItem");
+
+            entity.Property(e => e.LineTotal)
+        .HasColumnType("decimal(18, 2)");
+
+            entity.Property(e => e.UnitPrice)
+                .HasColumnType("decimal(18, 2)");
+
+            entity.HasOne(d => d.Shipment)
+                .WithMany(p => p.ShipmentItems)
+                .HasForeignKey(d => d.ShipmentId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ShipmentItem_Shipment");
+
+            entity.HasOne(d => d.Product)
+                .WithMany(p => p.ShipmentItems)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_ShipmentItem_Product");
+
+            entity.HasOne(d => d.Location)
+                .WithMany(p => p.ShipmentItems)
+                .HasForeignKey(d => d.LocationId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_ShipmentItem_Location");
         });
 
         modelBuilder.Entity<StockLevel>(entity =>

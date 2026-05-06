@@ -44,4 +44,6 @@ public partial class Product
     public virtual ICollection<StockLevel> StockLevels { get; set; } = new List<StockLevel>();
 
     public virtual Supplier? Supplier { get; set; }
+
+    public virtual ICollection<ShipmentItem> ShipmentItems { get; set; } = new List<ShipmentItem>();
 }

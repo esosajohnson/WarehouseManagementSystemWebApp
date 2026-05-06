@@ -20,4 +20,6 @@ public partial class Location
     public virtual ICollection<StockLevel> StockLevels { get; set; } = new List<StockLevel>();
 
     public virtual ICollection<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
+
+    public virtual ICollection<ShipmentItem> ShipmentItems { get; set; } = new List<ShipmentItem>();
 }

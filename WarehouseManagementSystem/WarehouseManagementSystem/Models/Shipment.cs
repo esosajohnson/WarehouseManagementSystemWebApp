@@ -18,4 +18,6 @@ public partial class Shipment
     public string Status { get; set; } = null!;
 
     public string? Notes { get; set; }
+
+    public virtual ICollection<ShipmentItem> ShipmentItems { get; set; } = new List<ShipmentItem>();
 }
