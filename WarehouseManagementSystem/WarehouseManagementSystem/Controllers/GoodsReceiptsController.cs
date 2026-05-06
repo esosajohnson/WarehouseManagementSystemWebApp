@@ -59,10 +59,7 @@ namespace WarehouseManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", null);
-            ViewData["PurchaseOrderId"] = new SelectList
-                (_context.PurchaseOrders.Where(p => p.OrderStatus == "Approved" || p.OrderStatus == "PartiallyReceived"), "PurchaseOrderId", "PurchaseOrderId", null);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", null);
+            PopulateDropDowns();
             return View();
         }
 
@@ -77,9 +74,7 @@ namespace WarehouseManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", goodsReceipt.EmployeeId);
-            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", goodsReceipt.PurchaseOrderId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", goodsReceipt.SupplierId);
+            PopulateDropDowns(goodsReceipt);
             return View(goodsReceipt);
         }
 
@@ -98,9 +93,7 @@ namespace WarehouseManagementSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", goodsReceipt.EmployeeId);
-            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", goodsReceipt.PurchaseOrderId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", goodsReceipt.SupplierId);
+            PopulateDropDowns(goodsReceipt);
             return View(goodsReceipt);
         }
 
@@ -134,9 +127,7 @@ namespace WarehouseManagementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", goodsReceipt.EmployeeId);
-            ViewData["PurchaseOrderId"] = new SelectList(_context.PurchaseOrders, "PurchaseOrderId", "PurchaseOrderId", goodsReceipt.PurchaseOrderId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", goodsReceipt.SupplierId);
+            PopulateDropDowns(goodsReceipt);
             return View(goodsReceipt);
         }
 
@@ -211,6 +202,21 @@ namespace WarehouseManagementSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private void PopulateDropDowns(GoodsReceipt? selected = null)
+        {
+            var eligiblePurchaseOrders = _context.PurchaseOrders
+                .Where(p => p.OrderStatus == PurchaseOrderStatus.Approved
+                        || p.OrderStatus == PurchaseOrderStatus.PartiallyReceived)
+                .Select(p => new
+                {
+                    p.PurchaseOrderId,
+                    Display = $"PO#{p.PurchaseOrderId} - {p.Supplier.Name}"
+                });
+            ViewData["PurchaseOrderId"] = new SelectList(eligiblePurchaseOrders, "PurchaseOrderId", "Display", selected?.PurchaseOrderId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", selected?.SupplierId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", selected?.EmployeeId);
+
+        }
 
         private bool GoodsReceiptExists(int id)
         {

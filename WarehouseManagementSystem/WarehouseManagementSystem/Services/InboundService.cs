@@ -38,7 +38,7 @@ namespace WarehouseManagementSystem.Services
                     var po = await _context.PurchaseOrders.FindAsync(receipt.PurchaseOrderId.Value);
                     if (po != null)
                     {
-                        po.OrderStatus = "Received";
+                        po.OrderStatus = PurchaseOrderStatus.Received;
                         _context.PurchaseOrders.Update(po);
                     }
 
