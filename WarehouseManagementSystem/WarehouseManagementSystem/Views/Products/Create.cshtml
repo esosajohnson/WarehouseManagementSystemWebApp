@@ -28,21 +28,21 @@
             </div>
             <div class="mb-3">
                 <label asp-for="CategoryId" class="control-label fw-semibold">Category</label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId">
                     <option value="">Please select a category</option>
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="SupplierId" class="control-label fw-semibold">Supplier</label>
-                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
+                <select asp-for="SupplierId" class="form-select" asp-items="ViewBag.SupplierId">
                     <option value="">Please select a supplier</option>
                 </select>
                 <span asp-validation-for="SupplierId" class="text-danger"></span>
             </div>
             <div class="mb-4">
                 <label asp-for="LocationId" class="control-label fw-semibold">Location</label>
-                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId">
+                <select asp-for="LocationId" class="form-select" asp-items="ViewBag.LocationId">
                     <option value="">Please select a location</option>
                 </select>
                 <span asp-validation-for="LocationId" class="text-danger"></span>

@@ -34,58 +34,75 @@
     </div>
 </div>
 
-<div class="card shadow-sm border-0 rounded-4">
-    <div class="card-body p-4">
-        @if (!Model.Any())
-        {
-            <p class="text-muted">
-                No products available. Click "Add New Product" to create your first product.
-            </p>
-        }
-        else
-        {
-            <table class="table table-hover align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock Quantity</th>
-                        <th>Sku</th>
-                        <th>Location</th>
-                        <th>Supplier</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+<div class="container px-1">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+            @if (!Model.Any())
+            {
+                <p class="text-muted">
+                    No products available. Click "Add New Product" to create your first product.
+                </p>
+            }
+            else
+            {
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
                         <tr>
-                            <td>@item.Name</td>
-                            <td>@item.Category?.Name</td>
-                            <td>@item.Price.ToString("C")</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.Sku</td>
-                            <td>@item.Location?.Name</td>
-                            <td>@item.Supplier?.Name</td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.ProductId"
-                                   class="btn btn-outline-secondary btn-sm me-2">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <a asp-action="Details" asp-route-id="@item.ProductId"
-                                   class="btn btn-outline-info btn-sm me-2">
-                                    <i class="bi bi-eye"></i> Details
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.ProductId"
-                                   class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Delete
-                                </a>
-                            </td>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock Quantity</th>
+                            <th>Sku</th>
+                            <th>Location</th>
+                            <th>Supplier</th>
+                            <th>Actions</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Category?.Name</td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@item.Quantity</td>
+                                <td>
+                                    @if (item.Quantity < 10)
+                                    {
+                                        <span class="badge bg-danger">@item.Sku</span>
+                                    }
+                                    else if (item.Quantity < 20)
+                                    {
+                                        <span class="badge bg-warning text-dark">@item.Sku</span>
+                                    }
+                                    else
+                                    {
+                                        @item.Sku
+                                    }
+                                </td>
+                                <td>@item.Location?.Name</td>
+                                <td>@item.Supplier?.Name</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.ProductId"
+                                               class="btn btn-outline-secondary btn-sm">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.ProductId"
+                                               class="btn btn-outline-info btn-sm">
+                                            <i class="bi bi-eye"></i> Details
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.ProductId"
+                                               class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
     </div>
 </div>
