@@ -165,10 +165,7 @@ namespace WarehouseManagementSystem.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var goodsReceipt = await _context.GoodsReceipts.FindAsync(id);
-            if (goodsReceipt != null)
-            {
-                _context.GoodsReceipts.Remove(goodsReceipt);
-            }
+            if (goodsReceipt == null) return NotFound();
 
             if (goodsReceipt.Status == GoodsReceiptStatus.Received)
             {
@@ -176,6 +173,7 @@ namespace WarehouseManagementSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            _context.GoodsReceipts.Remove(goodsReceipt);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
