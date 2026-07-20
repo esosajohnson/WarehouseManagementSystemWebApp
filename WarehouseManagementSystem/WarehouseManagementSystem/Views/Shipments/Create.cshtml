@@ -1,46 +1,52 @@
 ﻿@model WarehouseManagementSystem.Models.Shipment
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Shipment";
 }
 
-<h1>Create</h1>
+<div class="container py-5">
+    <div class="card shadow-sm p-4 border-0 rounded-4 mx-auto" style="max-width: 800px;">
+        <h2 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h2>
 
-<h4>Shipment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Carrier" class="control-label"></label>
-                <input asp-for="Carrier" class="form-control" />
-                <span asp-validation-for="Carrier" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TrackingNumber" class="control-label"></label>
-                <input asp-for="TrackingNumber" class="form-control" />
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="TrackingNumber" class="form-label fw-semibold">Tracking Number</label>
+                <input asp-for="TrackingNumber" class="form-control" placeholder="Enter tracking number" />
                 <span asp-validation-for="TrackingNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Destination" class="control-label"></label>
-                <input asp-for="Destination" class="form-control" />
-                <span asp-validation-for="Destination" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="ShippingDate" class="form-label fw-semibold">Shipping Date</label>
+                <input asp-for="ShippingDate" class="form-control" type="date" />
+                <span asp-validation-for="ShippingDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
-                <input asp-for="Notes" class="form-control" />
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label fw-semibold">Order Status</label>
+                <select asp-for="Status" class="form-select">
+                    <option value="">Select Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label fw-semibold">Notes</label>
+                <textarea asp-for="Notes" class="form-control" placeholder="Enter notes"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-grid gap-2 d-md-block">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-check-circle me-1"></i> Create Shipment
+                </button>
+                <button type="reset" class="btn btn-info ms-2 px-4">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                </button>
+                <a asp-action="Index" class="btn btn-secondary ms-2 px-4">
+                    <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+                </a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

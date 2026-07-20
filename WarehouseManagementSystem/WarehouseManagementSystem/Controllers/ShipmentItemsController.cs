@@ -49,9 +49,7 @@ namespace WarehouseManagementSystem.Controllers
         // GET: ShipmentItems/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId");
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
-            ViewData["ShipmentId"] = new SelectList(_context.Shipments, "ShipmentId", "ShipmentId");
+            PopulateDropDowns();
             return View();
         }
 
@@ -68,9 +66,7 @@ namespace WarehouseManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", shipmentItem.LocationId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shipmentItem.ProductId);
-            ViewData["ShipmentId"] = new SelectList(_context.Shipments, "ShipmentId", "ShipmentId", shipmentItem.ShipmentId);
+            PopulateDropDowns(shipmentItem);
             return View(shipmentItem);
         }
 
@@ -87,9 +83,7 @@ namespace WarehouseManagementSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", shipmentItem.LocationId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shipmentItem.ProductId);
-            ViewData["ShipmentId"] = new SelectList(_context.Shipments, "ShipmentId", "ShipmentId", shipmentItem.ShipmentId);
+            PopulateDropDowns(shipmentItem);
             return View(shipmentItem);
         }
 
@@ -125,9 +119,7 @@ namespace WarehouseManagementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", shipmentItem.LocationId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shipmentItem.ProductId);
-            ViewData["ShipmentId"] = new SelectList(_context.Shipments, "ShipmentId", "ShipmentId", shipmentItem.ShipmentId);
+            PopulateDropDowns(shipmentItem);
             return View(shipmentItem);
         }
 
@@ -170,6 +162,13 @@ namespace WarehouseManagementSystem.Controllers
         private bool ShipmentItemExists(int id)
         {
             return _context.ShipmentItems.Any(e => e.ShipmentItemId == id);
+        }
+
+        private void PopulateDropDowns(ShipmentItem shipmentItem = null)
+        {
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", shipmentItem?.LocationId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shipmentItem?.ProductId);
+            ViewData["ShipmentId"] = new SelectList(_context.Shipments, "ShipmentId", "ShipmentId", shipmentItem?.ShipmentId);
         }
     }
 }
