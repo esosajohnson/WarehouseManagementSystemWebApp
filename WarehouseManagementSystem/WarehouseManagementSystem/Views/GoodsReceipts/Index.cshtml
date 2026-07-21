@@ -37,15 +37,19 @@
     </div>
 </div>
 
-<div class="container-fluid px-1">
+<div class="container px-1">
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">
 
             @if (!Model.Any())
             {
-                <div class="alert alert-info mb-0" role="alert">
-                    <i class="bi bi-info-circle-fill me-2"></i>
-                    No goods receipts found. Click "Create New Goods Receipt" to add your first entry.
+                <div class="text-center py-5">
+                    <i class="bi bi-file-earmark-text display-4 text-muted mb-3"></i>
+                    <h4 class="text-muted">No Goods Receipts Found</h4>
+                    <p class="text-muted">Click the button above to create your first goods receipt.</p>
+                    <a asp-action="Create" class="btn btn-primary mt-3">
+                        <i class="bi bi-plus-circle me-1"></i> Create Goods Receipt
+                    </a>
                 </div>
             }
             else

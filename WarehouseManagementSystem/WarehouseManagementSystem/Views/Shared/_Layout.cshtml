@@ -105,7 +105,7 @@
                 </li>
 
                 @{
-                    var inventoryControllers = new[] { "Products", "Categories", "Locations", "Inventory", "StockLevels", "InventoryTransactions" };
+                    var inventoryControllers = new[] { "Products", "Category", "Locations", "Inventory", "StockLevels", "InventoryTransactions" };
                     var inventoryActive = inventoryControllers.Contains(ViewContext.RouteData.Values["controller"]?.ToString());
                 }
 
@@ -127,9 +127,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Categories" ? "active" : "")"
+                                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Category" ? "active" : "")"
                                        asp-controller="Category" asp-action="Index">
-                                    <i class="bi bi-tag"></i> Categories
+                                    <i class="bi bi-folder"></i> Categories
                                 </a>
                             </li>
                             <li class="nav-item">
