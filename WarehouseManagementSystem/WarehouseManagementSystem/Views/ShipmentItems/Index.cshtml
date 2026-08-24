@@ -1,65 +1,94 @@
 ﻿@model IEnumerable<WarehouseManagementSystem.Models.ShipmentItem>
 
-@{
-    ViewData["Title"] = "Index";
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
-<h1>Index</h1>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary fw-semibold">Shipment Items</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary px-4">
+                <i class="bi bi-plus-circle me-1"></i> Add Shipment Item
+            </a>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityShipped)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LineTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shipment)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityShipped)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LineTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.LocationId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shipment.ShipmentId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ShipmentItemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ShipmentItemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ShipmentItemId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-12">
+            <p class="text-muted">Manage your shipment items here. You can view, edit, and delete existing shipment items.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container px-1">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-box-seam fs-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">No shipment items found.</h4>
+                    <p class="text-muted">Click the button above to add a new shipment item.</p>
+                    <a asp-action="Create" class="btn btn-primary px-4 mt-3">
+                        <i class="bi bi-plus-circle me-1"></i> Add Shipment Item
+                    </a>
+                </div>
+            }
+            else
+            {
+                <table class="table table-striped table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Shipment ID</th>
+                            <th>Product</th>
+                            <th>Location</th>
+                            <th>Quantity Shipped</th>
+                            <th>Unit Price</th>
+                            <th>Line Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ShipmentId</td>
+                                <td>@item.Product?.Name</td>
+                                <td>@item.Location?.Name</td>
+                                <td>@item.QuantityShipped</td>
+                                <td>@(item.UnitPrice?.ToString("C2") ?? "—")</td>
+                                <td>@(item.LineTotal?.ToString("C2") ?? "—")</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.ShipmentItemId"
+                                           class="btn btn-outline-secondary btn-sm">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.ShipmentItemId"
+                                           class="btn btn-outline-info btn-sm">
+                                            <i class="bi bi-eye"></i> Details
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.ShipmentItemId"
+                                           class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
