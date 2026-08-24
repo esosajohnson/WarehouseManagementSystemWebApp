@@ -15,7 +15,7 @@ public partial class Shipment
 
     public string? Destination { get; set; }
 
-    public string Status { get; set; } = null!;
+    public ShipmentStatus Status { get; set; } = ShipmentStatus.Pending;
 
     public string? Notes { get; set; }
 

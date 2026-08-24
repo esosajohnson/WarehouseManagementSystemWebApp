@@ -18,6 +18,7 @@ builder.Services.AddDbContext<WarehouseDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<InboundService>();
+builder.Services.AddScoped<OutboundService>();
 
 // Configure Identity with ApplicationUser
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)

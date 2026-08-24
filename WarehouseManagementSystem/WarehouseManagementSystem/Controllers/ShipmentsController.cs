@@ -3,16 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.Models;
+using WarehouseManagementSystem.Services;
 
 namespace WarehouseManagementSystem.Controllers
 {
     public class ShipmentsController : Controller
     {
         private readonly WarehouseDbContext _context;
+        private readonly OutboundService _outboundService;
 
-        public ShipmentsController(WarehouseDbContext context)
+        public ShipmentsController(WarehouseDbContext context, OutboundService outboundService)
         {
             _context = context;
+            _outboundService = outboundService;
         }
 
         // GET: Shipments
@@ -146,6 +149,27 @@ namespace WarehouseManagementSystem.Controllers
             }
 
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Dispatch(int id)
+        {
+            try
+            {
+                await _outboundService.DispatchShipmentAsync(id);
+                TempData["SuccessMessage"] = "Shipment dispatched successfully. Stock levels updated.";
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while dispatching the shipment: " + ex.Message;
+            }
             return RedirectToAction(nameof(Index));
         }
 

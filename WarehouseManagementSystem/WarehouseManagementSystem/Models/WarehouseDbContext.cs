@@ -333,8 +333,9 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Status)
+                .HasConversion<string>()
                 .HasMaxLength(50)
-                .HasDefaultValue("Pending");
+                .HasDefaultValue(ShipmentStatus.Pending);
             entity.Property(e => e.TrackingNumber).HasMaxLength(100);
         });
 
