@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
@@ -63,7 +59,7 @@ namespace WarehouseManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Sku,Quantity,SupplierId,LocationId,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Sku,Quantity,Price,SupplierId,LocationId,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +98,7 @@ namespace WarehouseManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Sku,Quantity,SupplierId,LocationId,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Sku,Quantity,Price,SupplierId,LocationId,CategoryId")] Product product)
         {
             if (id != product.ProductId)
             {
