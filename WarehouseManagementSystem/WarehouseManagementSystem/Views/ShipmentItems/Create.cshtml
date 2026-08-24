@@ -6,17 +6,23 @@
         <form asp-action="Create" method="post">
             <div class="mb-3">
                 <label asp-for="ShipmentId" class="form-label"></label>
-                <input asp-for="ShipmentId" class="form-control" />
+                <select asp-for="ShipmentId" class="form-select" asp-items="ViewBag.ShipmentId">
+                    <option value="">-- Select Shipment --</option>
+                </select>
                 <span asp-validation-for="ShipmentId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="ProductId" class="form-label"></label>
-                <select asp-for="ProductId" class="form-select" asp-items="ViewBag.Products"></select>
+                <select asp-for="ProductId" class="form-select" asp-items="ViewBag.ProductId">
+                    <option value="">-- Select Product --</option>
+                </select>
                 <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="LocationId" class="form-label"></label>
-                <select asp-for="LocationId" class="form-select" asp-items="ViewBag.Locations"></select>
+                <select asp-for="LocationId" class="form-select" asp-items="ViewBag.LocationId">
+                    <option value="">-- Select Location --</option>
+                </select>
                 <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -42,3 +48,7 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

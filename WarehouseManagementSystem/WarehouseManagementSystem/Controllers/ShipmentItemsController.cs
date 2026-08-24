@@ -62,6 +62,9 @@ namespace WarehouseManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (shipmentItem.UnitPrice.HasValue)
+                    shipmentItem.LineTotal = shipmentItem.QuantityShipped * shipmentItem.UnitPrice;
+
                 _context.Add(shipmentItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -103,6 +106,9 @@ namespace WarehouseManagementSystem.Controllers
             {
                 try
                 {
+                    if (shipmentItem.UnitPrice.HasValue)
+                        shipmentItem.LineTotal = shipmentItem.QuantityShipped * shipmentItem.UnitPrice;
+
                     _context.Update(shipmentItem);
                     await _context.SaveChangesAsync();
                 }
@@ -150,11 +156,9 @@ namespace WarehouseManagementSystem.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var shipmentItem = await _context.ShipmentItems.FindAsync(id);
-            if (shipmentItem != null)
-            {
-                _context.ShipmentItems.Remove(shipmentItem);
-            }
+            if (shipmentItem == null) return NotFound();
 
+            _context.ShipmentItems.Remove(shipmentItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -166,9 +170,11 @@ namespace WarehouseManagementSystem.Controllers
 
         private void PopulateDropDowns(ShipmentItem shipmentItem = null)
         {
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", shipmentItem?.LocationId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shipmentItem?.ProductId);
-            ViewData["ShipmentId"] = new SelectList(_context.Shipments, "ShipmentId", "ShipmentId", shipmentItem?.ShipmentId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", shipmentItem?.LocationId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "Name", shipmentItem?.ProductId);
+            ViewData["ShipmentId"] = new SelectList(
+                _context.Shipments.Select(s => new { s.ShipmentId, Display = "Shipment #" + s.ShipmentId }),
+                "ShipmentId", "Display", shipmentItem?.ShipmentId);
         }
     }
 }

@@ -6,10 +6,10 @@
         <dl class="row">
             <dt class="col-sm-4">Shipment ID</dt>
             <dd class="col-sm-8">@Model.ShipmentId</dd>
-            <dt class="col-sm-4">Product ID</dt>
-            <dd class="col-sm-8">@Model.ProductId</dd>
-            <dt class="col-sm-4">Location ID</dt>
-            <dd class="col-sm-8">@Model.LocationId</dd>
+            <dt class="col-sm-4">Product</dt>
+            <dd class="col-sm-8">@Model.Product?.Name</dd>
+            <dt class="col-sm-4">Location</dt>
+            <dd class="col-sm-8">@Model.Location?.Name</dd>
             <dt class="col-sm-4">Quantity Shipped</dt>
             <dd class="col-sm-8">@Model.QuantityShipped</dd>
             <dt class="col-sm-4">Unit Price</dt>
