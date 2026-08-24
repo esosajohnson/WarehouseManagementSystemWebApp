@@ -19,7 +19,7 @@ public partial class ShipmentItem
 
     public decimal? LineTotal { get; set; }
 
-    public virtual Location Location { get; set; } = null!;
-    public virtual Product Product { get; set; } = null!;
-    public virtual Shipment Shipment { get; set; } = null!;
+    public virtual Location? Location { get; set; }
+    public virtual Product? Product { get; set; }
+    public virtual Shipment? Shipment { get; set; }
 }
