@@ -29,7 +29,13 @@
             </div>
             <div class="mb-3">
                 <label asp-for="OrderStatus" class="control-label">Order Status</label>
-                <input asp-for="OrderStatus" class="form-control" />
+                <select asp-for="OrderStatus" class="form-control">
+                    <option value="">Select Status</option>
+                    @foreach (var status in Enum.GetValues(typeof(WarehouseManagementSystem.Models.PurchaseOrderStatus)))
+                    {
+                        <option value="@status">@status</option>
+                    }
+                </select>
                 <span asp-validation-for="OrderStatus" class="text-danger"></span>
             </div>
             <div class="mb-3">

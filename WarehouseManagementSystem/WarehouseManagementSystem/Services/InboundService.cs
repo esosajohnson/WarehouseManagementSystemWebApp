@@ -30,7 +30,7 @@ namespace WarehouseManagementSystem.Services
 
                 foreach (var item in receipt.GoodsReceiptItems)
                 {
-                    await ProcessReceiptItem(item, receipt.EmployeeId);
+                    await ProcessReceiptItem(item, receipt.EmployeeId, goodsReceiptId);
                 }
 
                 if (receipt.PurchaseOrderId.HasValue)
@@ -54,7 +54,7 @@ namespace WarehouseManagementSystem.Services
                 throw;
             }
         }
-        private async Task ProcessReceiptItem(GoodsReceiptItem item, int? employeeId)
+        private async Task ProcessReceiptItem(GoodsReceiptItem item, int? employeeId, int goodsReceiptId)
         {
             if (item.QuantityReceived <= 0)
                 throw new Exception($"Invalid quantity received for product {item.ProductId}.");
@@ -87,6 +87,7 @@ namespace WarehouseManagementSystem.Services
                 TransactionType = "Inbound",
                 TransactionDate = DateTime.UtcNow,
                 EmployeeId = employeeId,
+                ReferenceId = item.GoodsReceiptId,
                 Notes = $"Received {item.QuantityReceived} units at location {item.LocationId}."
             });
         }

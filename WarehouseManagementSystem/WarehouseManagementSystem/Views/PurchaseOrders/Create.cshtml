@@ -26,9 +26,12 @@
                 <label asp-for="OrderStatus" class="form-label fw-semibold">Order Status</label>
                 <select asp-for="OrderStatus" class="form-select">
                     <option value="">Select Status</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Received">Received</option>
+                    @foreach (var status in Enum.GetValues(typeof(WarehouseManagementSystem.Models.PurchaseOrderStatus)))
+                    {
+                        <option value="@status">@status</option>
+                    }
                 </select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="ExpectedDate" class="form-label fw-semibold">Expected Date</label>
