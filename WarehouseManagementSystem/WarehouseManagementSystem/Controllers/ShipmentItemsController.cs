@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WarehouseManagementSystem.Models;
@@ -62,6 +58,10 @@ namespace WarehouseManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var product = await _context.Products.FindAsync(shipmentItem.ProductId);
+                if (product != null)
+                    shipmentItem.UnitPrice = product.Price;
+
                 if (shipmentItem.UnitPrice.HasValue)
                     shipmentItem.LineTotal = shipmentItem.QuantityShipped * shipmentItem.UnitPrice;
 
