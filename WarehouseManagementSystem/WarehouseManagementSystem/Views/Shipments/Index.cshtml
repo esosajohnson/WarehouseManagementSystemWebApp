@@ -83,6 +83,14 @@
                                        class="btn btn-sm btn-outline-danger">
                                         <i class="bi bi-trash-fill me-1"></i> Delete
                                     </a>
+                                    <form asp-action="Dispatch" asp-route-id="@shipment.ShipmentId"
+                                          method="post" class="m-0 p-0 d-flex">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-success btn-sm"
+                                            @(shipment.Status == ShipmentStatus.Dispatched ? "disabled" : "")>
+                                            <i class="bi bi-send-fill me-1"></i> Dispatch
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         }
