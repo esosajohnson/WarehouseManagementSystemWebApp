@@ -337,6 +337,10 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .HasMaxLength(50)
                 .HasDefaultValue(ShipmentStatus.Pending);
             entity.Property(e => e.TrackingNumber).HasMaxLength(100);
+            entity.HasOne(s => s.Employee)
+                .WithMany()
+                .HasForeignKey(s => s.EmployeeId)
+                .OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<ShipmentItem>(entity =>
