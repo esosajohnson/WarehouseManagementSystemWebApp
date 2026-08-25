@@ -55,7 +55,7 @@ namespace WarehouseManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShipmentId,Carrier,TrackingNumber,ShippingDate,Destination,Status,Notes")] Shipment shipment)
+        public async Task<IActionResult> Create([Bind("ShipmentId,EmployeeId,Carrier,TrackingNumber,ShippingDate,Destination,Status,Notes")] Shipment shipment)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace WarehouseManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShipmentId,Carrier,TrackingNumber,ShippingDate,Destination,Status,Notes")] Shipment shipment)
+        public async Task<IActionResult> Edit(int id, [Bind("ShipmentId,EmployeeId,Carrier,TrackingNumber,ShippingDate,Destination,Status,Notes")] Shipment shipment)
         {
             if (id != shipment.ShipmentId)
             {

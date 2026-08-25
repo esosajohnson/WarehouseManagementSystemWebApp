@@ -36,7 +36,7 @@ namespace WarehouseManagementSystem.Services
                 }
                 foreach (var item in shipment.ShipmentItems)
                 {
-                    await ProcessShipmentItem(item, null);
+                    await ProcessShipmentItem(item, shipment.EmployeeId, shipment.ShipmentId);
                 }
 
                 shipment.Status = ShipmentStatus.Dispatched;
@@ -53,7 +53,7 @@ namespace WarehouseManagementSystem.Services
             }
         }
 
-        private async Task ProcessShipmentItem(ShipmentItem item, int? employeeId)
+        private async Task ProcessShipmentItem(ShipmentItem item, int? employeeId, int ShipmentId)
         {
             if (item.QuantityShipped <= 0)
                 throw new InvalidOperationException($"Invalid quantity for product {item.ProductId}");
@@ -78,6 +78,7 @@ namespace WarehouseManagementSystem.Services
                 TransactionType = "Outbound",
                 TransactionDate = DateTime.UtcNow,
                 EmployeeId = employeeId,
+                ReferenceId = item.ShipmentId,
                 Notes = $"Dispatched {item.QuantityShipped} units from location {item.LocationId}."
             });
         }

@@ -7,6 +7,8 @@ public partial class Shipment
 {
     public int ShipmentId { get; set; }
 
+    public int? EmployeeId { get; set; }
+
     public string? Carrier { get; set; }
 
     public string? TrackingNumber { get; set; }
@@ -18,6 +20,8 @@ public partial class Shipment
     public ShipmentStatus Status { get; set; } = ShipmentStatus.Pending;
 
     public string? Notes { get; set; }
+
+    public virtual Employee? Employee { get; set; }
 
     public virtual ICollection<ShipmentItem> ShipmentItems { get; set; } = new List<ShipmentItem>();
 }
