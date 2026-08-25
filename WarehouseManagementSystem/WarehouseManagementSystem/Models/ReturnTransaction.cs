@@ -9,6 +9,10 @@ public partial class ReturnTransaction
 
     public int ProductId { get; set; }
 
+    public int? LocationId { get; set; }
+
+    public int? ShipmentId { get; set; }
+
     public int Quantity { get; set; }
 
     public string? ReturnReason { get; set; }
@@ -17,11 +21,15 @@ public partial class ReturnTransaction
 
     public int? ProcessedByEmployeeId { get; set; }
 
-    public string? ConditionStatus { get; set; }
+    public ReturnStatus ConditionStatus { get; set; } = ReturnStatus.Pending;
 
     public string? Notes { get; set; }
 
     public virtual Employee? ProcessedByEmployee { get; set; }
 
     public virtual Product Product { get; set; } = null!;
+
+    public virtual Location? Location { get; set; }
+
+    public virtual Shipment? Shipment { get; set; }
 }

@@ -305,7 +305,10 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
         {
             entity.ToTable("ReturnTransaction");
 
-            entity.Property(e => e.ConditionStatus).HasMaxLength(50);
+            entity.Property(e => e.ConditionStatus)
+                .HasConversion<string>()
+                .HasMaxLength(50)
+                .HasDefaultValue(ReturnStatus.Pending);
             entity.Property(e => e.Notes).HasMaxLength(500);
             entity.Property(e => e.ReturnDate)
                 .HasDefaultValueSql("(getdate())")
@@ -320,6 +323,14 @@ public partial class WarehouseDbContext : IdentityDbContext<ApplicationUser>
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ReturnTransaction_Product");
+            entity.HasOne(e => e.Location)
+                .WithMany()
+                .HasForeignKey(e => e.LocationId)
+                .OnDelete(DeleteBehavior.SetNull);
+            entity.HasOne(e => e.Shipment)
+                .WithMany()
+                .HasForeignKey(e => e.ShipmentId)
+                .OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<Shipment>(entity =>
