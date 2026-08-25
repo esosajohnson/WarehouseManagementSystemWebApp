@@ -57,14 +57,12 @@
                 <table class="table table-hover align-middle table-lg">
                     <thead class="table-light">
                         <tr>
-                            <th>Receipt ID</th>
                             <th>Purchase Order</th>
                             <th>Supplier</th>
                             <th>Employee</th>
                             <th>Receipt Date</th>
                             <th>Reference Number</th>
                             <th>Status</th>
-                            <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -72,7 +70,6 @@
                         @foreach (var entry in Model)
                         {
                             <tr>
-                                <td>@entry.GoodsReceiptId</td>
                                 <td>@entry.PurchaseOrderId</td>
                                 <td>@entry.Supplier?.Name</td>
                                 <td>@entry.Employee?.FullName</td>
@@ -98,7 +95,6 @@
                                             break;
                                     }
                                 </td>
-                                <td>@entry.Notes</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <a asp-action="Edit" asp-route-id="@entry.GoodsReceiptId"
@@ -131,11 +127,3 @@
         </div>
     </div>
 </div>
-
-
-<style>
-    .table-lg td,
-    .table-lg th {
-        padding: 1rem 1.25rem;
-    }
-</style>
