@@ -16,6 +16,16 @@
                 <span asp-validation-for="TrackingNumber" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="Carrier" class="form-label fw-semibold">Carrier</label>
+                <input asp-for="Carrier" class="form-control" placeholder="e.g. DHL, FedEx, Royal Mail" />
+                <span asp-validation-for="Carrier" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Destination" class="form-label fw-semibold">Destination</label>
+                <input asp-for="Destination" class="form-control" placeholder="Enter destination address" />
+                <span asp-validation-for="Destination" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="ShippingDate" class="form-label fw-semibold">Shipping Date</label>
                 <input asp-for="ShippingDate" class="form-control" type="date" />
                 <span asp-validation-for="ShippingDate" class="text-danger"></span>
@@ -28,6 +38,13 @@
                     <option value="In Transit">In Transit</option>
                     <option value="Delivered">Delivered</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EmployeeId" class="form-label fw-semibold">Employee</label>
+                <select asp-for="EmployeeId" class="form-select" asp-items="ViewBag.EmployeeId">
+                    <option value="">Select Employee</option>
+                </select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Notes" class="form-label fw-semibold">Notes</label>

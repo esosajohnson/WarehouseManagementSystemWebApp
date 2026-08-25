@@ -8,16 +8,20 @@
     <div class="card shadow-sm p-4 border-0 rounded-4 mx-auto" style="max-width: 800px;">
         <h2 class="text-primary fw-semibold mb-4">Shipment Details</h2>
         <dl class="row">
-            <dt class="col-sm-3">Shipment ID</dt>
-            <dd class="col-sm-9">@Model.ShipmentId</dd>
             <dt class="col-sm-3">Tracking Number</dt>
-            <dd class="col-sm-9">@Model.TrackingNumber</dd>
+            <dd class="col-sm-9">@(Model.TrackingNumber ?? "-")</dd>
+            <dt class="col-sm-3">Carrier</dt>
+            <dd class="col-sm-9">@(Model.Carrier ?? "-")</dd>
+            <dt class="col-sm-3">Destination</dt>
+            <dd class="col-sm-9">@(Model.Destination ?? "-")</dd>
             <dt class="col-sm-3">Shipping Date</dt>
             <dd class="col-sm-9">@Model.ShippingDate</dd>
             <dt class="col-sm-3">Status</dt>
             <dd class="col-sm-9">@Model.Status</dd>
+            <dt class="col-sm-3">Employee</dt>
+            <dd class="col-sm-9">@(Model.Employee?.FullName ?? "-")</dd>
             <dt class="col-sm-3">Notes</dt>
-            <dd class="col-sm-9">@Model.Notes</dd>
+            <dd class="col-sm-9">@(Model.Notes ?? "-")</dd>
         </dl>
         <div class="mt-4">
             <a asp-action="Edit" asp-route-id="@Model.ShipmentId" class="btn btn-primary px-4 me-2">

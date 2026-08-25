@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.Models;
 using WarehouseManagementSystem.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WarehouseManagementSystem.Controllers
 {
@@ -22,7 +23,9 @@ namespace WarehouseManagementSystem.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Shipments.ToListAsync());
+            return View(await _context.Shipments
+                .Include(s => s.Employee)
+                .ToListAsync());
         }
 
         // GET: Shipments/Details/5
@@ -34,7 +37,9 @@ namespace WarehouseManagementSystem.Controllers
             }
 
             var shipment = await _context.Shipments
+                .Include(s => s.Employee)
                 .FirstOrDefaultAsync(m => m.ShipmentId == id);
+
             if (shipment == null)
             {
                 return NotFound();
@@ -47,6 +52,7 @@ namespace WarehouseManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            PopulateDropDowns(new Shipment());
             return View();
         }
 
@@ -63,6 +69,7 @@ namespace WarehouseManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulateDropDowns(shipment);
             return View(shipment);
         }
 
@@ -76,10 +83,9 @@ namespace WarehouseManagementSystem.Controllers
             }
 
             var shipment = await _context.Shipments.FindAsync(id);
-            if (shipment == null)
-            {
-                return NotFound();
-            }
+            if (shipment == null) return NotFound();
+
+            PopulateDropDowns(shipment);
             return View(shipment);
         }
 
@@ -115,6 +121,7 @@ namespace WarehouseManagementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PopulateDropDowns(shipment);
             return View(shipment);
         }
 
@@ -128,7 +135,9 @@ namespace WarehouseManagementSystem.Controllers
             }
 
             var shipment = await _context.Shipments
+                .Include(s => s.Employee)
                 .FirstOrDefaultAsync(m => m.ShipmentId == id);
+
             if (shipment == null)
             {
                 return NotFound();
@@ -176,6 +185,11 @@ namespace WarehouseManagementSystem.Controllers
         private bool ShipmentExists(int id)
         {
             return _context.Shipments.Any(e => e.ShipmentId == id);
+        }
+
+        private void PopulateDropDowns(Shipment shipment)
+        {
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FullName", shipment.EmployeeId);
         }
     }
 }
