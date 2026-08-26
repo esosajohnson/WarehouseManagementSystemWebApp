@@ -219,11 +219,9 @@ namespace WarehouseManagementSystem.Controllers
                 _context.Locations, "LocationId", "Name", selected?.LocationId);
 
             ViewData["ShipmentId"] = new SelectList(
-                _context.Shipments.Select(s => new
-                {
-                    s.ShipmentId,
-                    Display = "Shipment #" + s.ShipmentId
-                }),
+                _context.Shipments
+                    .Where(s => s.Status == ShipmentStatus.Dispatched)
+                    .Select(s => new { s.ShipmentId, Display = "Shipment #" + s.ShipmentId }),
                 "ShipmentId", "Display", selected?.ShipmentId);
 
             ViewData["ProcessedByEmployeeId"] = new SelectList(
