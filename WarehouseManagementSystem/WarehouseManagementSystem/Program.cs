@@ -19,6 +19,7 @@ builder.Services.AddDbContext<WarehouseDbContext>(options =>
 
 builder.Services.AddScoped<InboundService>();
 builder.Services.AddScoped<OutboundService>();
+builder.Services.AddScoped<ReturnService>();
 
 // Configure Identity with ApplicationUser
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
