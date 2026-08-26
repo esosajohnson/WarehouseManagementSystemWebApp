@@ -27,7 +27,7 @@ public partial class ReturnTransaction
 
     public virtual Employee? ProcessedByEmployee { get; set; }
 
-    public virtual Product Product { get; set; } = null!;
+    public virtual Product? Product { get; set; }
 
     public virtual Location? Location { get; set; }
 

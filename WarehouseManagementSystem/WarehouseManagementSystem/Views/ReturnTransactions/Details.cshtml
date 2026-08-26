@@ -1,0 +1,44 @@
+@model WarehouseManagementSystem.Models.ReturnTransaction
+
+@{
+    ViewData["Title"] = "Return Transaction Details";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+        <h3 class="mb-3">Return Details</h3>
+        <dl class="row">
+            <dt class="col-sm-3">Return Date</dt>
+            <dd class="col-sm-9">@Model.ReturnDate.ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">Product</dt>
+            <dd class="col-sm-9">@Model.Product?.Name</dd>
+
+            <dt class="col-sm-3">Location</dt>
+            <dd class="col-sm-9">@(Model.Location?.Name ?? "-")</dd>
+
+            <dt class="col-sm-3">Shipment</dt>
+            <dd class="col-sm-9">@(Model.ShipmentId.HasValue ? "Shipment #" + Model.ShipmentId : "-")</dd>
+
+            <dt class="col-sm-3">Quantity</dt>
+            <dd class="col-sm-9">@Model.Quantity</dd>
+
+            <dt class="col-sm-3">Condition</dt>
+            <dd class="col-sm-9">@Model.ConditionStatus</dd>
+
+            <dt class="col-sm-3">Return Reason</dt>
+            <dd class="col-sm-9">@(Model.ReturnReason ?? "-")</dd>
+
+            <dt class="col-sm-3">Processed By</dt>
+            <dd class="col-sm-9">@(Model.ProcessedByEmployee != null ? Model.ProcessedByEmployee.FirstName + " " + Model.ProcessedByEmployee.LastName : "-")</dd>
+
+            <dt class="col-sm-3">Notes</dt>
+            <dd class="col-sm-9">@Model.Notes</dd>
+        </dl>
+
+        <a asp-action="Edit" asp-route-id="@Model.ReturnTransactionId" class="btn btn-primary">
+            <i class="bi bi-pencil-square me-1"></i> Edit
+        </a>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+    </div>
+</div>
