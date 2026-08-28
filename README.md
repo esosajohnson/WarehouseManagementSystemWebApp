@@ -125,13 +125,8 @@ Return → ReturnService
 git clone https://github.com/esosajohnson/WarehouseManagementSystemWebApp.git
 ```
 
-2. Update the connection string in `appsettings.json`:
-```json
-"ConnectionStrings": {
-    "DefaultConnection": "Server=YOUR_SERVER;Database=WarehouseDB;
-    Trusted_Connection=True;TrustServerCertificate=True"
-}
-```
+2. Copy `appsettings.example.json` to `appsettings.json` and update 
+   the connection string with your SQL Server details.
 
 3. Apply migrations:
 ```bash
