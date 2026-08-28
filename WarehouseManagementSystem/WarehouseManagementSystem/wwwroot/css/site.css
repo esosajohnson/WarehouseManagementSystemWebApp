@@ -439,3 +439,79 @@ select.form-control {
     font-size: 0.78rem;
     font-weight: 500;
 }
+
+/* ===================================================
+   MOBILE RESPONSIVENESS
+=================================================== */
+
+@media (max-width: 991px) {
+
+    /* Hide sidebar off-screen by default on mobile */
+    .sidebar {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        height: 100vh;
+        z-index: 1050;
+        transition: left 0.3s ease;
+    }
+
+        /* Show sidebar when active */
+        .sidebar.active {
+            left: 0;
+        }
+
+    /* Main content takes full width on mobile */
+    .main-content {
+        width: 100%;
+    }
+
+    /* Overlay */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+    }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+    /* Stack KPI cards on mobile */
+    .col-xl-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Full width tables on mobile */
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    /* Reduce page padding on mobile */
+    .page-content {
+        padding: 16px;
+    }
+
+    .topbar {
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Stack all cards on very small screens */
+    .col-xl-3, .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Smaller heading on mobile */
+    .topbar-date {
+        display: none;
+    }
+}
