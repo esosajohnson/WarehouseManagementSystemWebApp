@@ -15,7 +15,7 @@
     <div class="row g-4 mb-4">
 
         <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body">
                     <h6 class="text-muted">Total Stock Units</h6>
                     <h2 class="fw-bold">@ViewData["TotalStockUnits"]</h2>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body">
                     <h6 class="text-muted">Inbound (Today)</h6>
                     <h2 class="fw-bold text-success">@ViewData["InboundToday"]</h2>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body">
                     <h6 class="text-muted">Outbound (Today)</h6>
                     <h2 class="fw-bold text-danger">@ViewData["OutboundToday"]</h2>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body">
                     <h6 class="text-muted">Open Purchase Orders</h6>
                     <h2 class="fw-bold">@ViewData["OpenPurchaseOrders"]</h2>
@@ -107,6 +107,7 @@
                 <div class="card-body">
                     <h5 class="fw-semibold mb-3">Recent Goods Receipts</h5>
 
+                    <div class="table-responsive">
                     <table class="table table-sm">
                         <thead class="table-light">
                             <tr>
@@ -126,6 +127,7 @@
                             }
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,6 +138,7 @@
                 <div class="card-body">
                     <h5 class="fw-semibold mb-3">Recent Shipments</h5>
 
+                    <div class="table-responsive">
                     <table class="table table-sm">
                         <thead class="table-light">
                             <tr>
@@ -157,6 +160,7 @@
                             }
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -515,3 +515,9 @@ select.form-control {
         display: none;
     }
 }
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1rem;
+    }
+}
