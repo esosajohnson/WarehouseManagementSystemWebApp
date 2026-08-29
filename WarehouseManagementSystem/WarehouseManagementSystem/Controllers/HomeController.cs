@@ -37,8 +37,8 @@ namespace WarehouseManagementSystem.Controllers
             ViewData["TotalEmployees"] = totalEmployees;
             ViewData["InventoryTransactions"] = InventoryTransactions;
             ViewData["TotalPurchaseOrders"] = PurchaseOrders;
-            ViewData["ReturnTransactions"] = ReturnTransactions;
-            ViewData["OutboundShipments"] = OutboundShipments;
+            ViewData["TotalReturns"] = ReturnTransactions;
+            ViewData["TotalOutbound"] = OutboundShipments;
             ViewData["TotalStockLevels"] = StockLevels;
             ViewData["TotalGoodsReceipts"] = GoodsReceipts;
 
