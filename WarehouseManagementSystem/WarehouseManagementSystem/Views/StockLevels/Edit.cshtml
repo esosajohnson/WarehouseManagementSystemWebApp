@@ -1,47 +1,50 @@
 ﻿@model WarehouseManagementSystem.Models.StockLevel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Stock Level";
 }
 
-<h1>Edit</h1>
-
-<h4>StockLevel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container py-5">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 600px;">
+        <h3 class="text-primary fw-semibold mb-4">Edit Stock Level</h3>
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="StockLevelId" />
-            <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+
+            <div class="mb-3">
+                <label asp-for="ProductId" class="form-label">Product</label>
+                <select asp-for="ProductId" class="form-select" asp-items="ViewBag.ProductId"></select>
                 <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LocationId" class="control-label"></label>
-                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+
+            <div class="mb-3">
+                <label asp-for="LocationId" class="form-label">Location</label>
+                <select asp-for="LocationId" class="form-select" asp-items="ViewBag.LocationId"></select>
                 <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="QuantityOnHand" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="QuantityOnHand" class="form-label">Quantity on Hand</label>
                 <input asp-for="QuantityOnHand" class="form-control" />
                 <span asp-validation-for="QuantityOnHand" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastUpdated" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="LastUpdated" class="form-label">Last Updated</label>
                 <input asp-for="LastUpdated" class="form-control" />
                 <span asp-validation-for="LastUpdated" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Save
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Cancel
+                </a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
