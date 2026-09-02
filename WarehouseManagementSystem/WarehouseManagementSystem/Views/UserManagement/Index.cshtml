@@ -4,69 +4,97 @@
     ViewData["Title"] = "User Management";
 }
 
-<div class="container mb-2">
+<div class="container">
     <div class="row pt-4 align-items-center">
-        <div class="col" style="margin-left: -13px;">
-            <h1 class="text-primary fw-semibold text-nowrap mb-3">@ViewData["Title"]</h1>
+        <div class="col d-flex align-items-center">
+            <h1 class="text-primary fw-semibold text-nowrap mb-3">User Management</h1>
         </div>
-        <div class="col-auto mb-2" style="">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary text-nowrap" style="margin-right: -22px;">Back to Home</a>
+        <div class="col-auto mb-2">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary text-nowrap">Back to Home</a>
         </div>
     </div>
+    <p class="text-muted">Manage application users and their roles. Promote users to Admin or demote them to Client as needed.</p>
 </div>
 
-<div class="container mb-4">
-    <div class="alert alert-info" role="alert" style="margin-left: -13px; width: 102%;">
-        <strong>Note:</strong> You can promote users to Admin or demote them to Client using the buttons below.
-    </div>
-</div>
+<div class="container px-1 mt-3">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead class="table-primary">
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date of Birth</th>
-                <th>Role</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
+            @if (TempData["SuccessMessage"] != null)
             {
-                <tr>
-                    <td>@user.FullName</td>
-                    <td>@user.Email</td>
-                    <td>@user.DateOfBirth.ToShortDateString()</td>
-                    <td>@string.Join(", ", user.Role)</td>
-                    <td>
-                        @if (!user.Role.Contains("Admin"))
-                        {
-                            <form asp-action="PromoteToAdmin" method="post" style="display:inline" class="action-form">
-                                <input type="hidden" name="userId" value="@user.Id" />
-                                <button type="button" class="btn btn-success"
-                                        onclick="showConfirmModal(this, 'Are you sure you want to promote this user to Admin?')">
-                                    Promote to Admin
-                                </button>
-                            </form>
-                        }
-
-                        @if (!user.Role.Contains("Client"))
-                        {
-                            <form asp-action="DemoteToClient" method="post" style="display:inline" class="action-form">
-                                <input type="hidden" name="userId" value="@user.Id" />
-                                <button type="button" class="btn btn-warning"
-                                        onclick="showConfirmModal(this, 'Are you sure you want to demote this user to Client?')">
-                                    Demote to Client
-                                </button>
-                            </form>
-                        }
-                    </td>
-                </tr>
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
             }
-        </tbody>
-    </table>
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-people display-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">No users found.</h4>
+                    <p class="text-muted">There are currently no users in the system.</p>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary px-4 mt-3">
+                        <i class="bi bi-arrow-left-circle me-1"></i> Back to Home
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Date of Birth</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td class="text-nowrap">@user.FullName</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.DateOfBirth.ToShortDateString()</td>
+                                    <td>@string.Join(", ", user.Role)</td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            @if (!user.Role.Contains("Admin"))
+                                            {
+                                                <form asp-action="PromoteToAdmin" method="post" class="m-0 p-0">
+                                                    <input type="hidden" name="userId" value="@user.Id" />
+                                                    <button type="button" class="btn btn-outline-success btn-sm text-nowrap"
+                                                            onclick="showConfirmModal(this, 'Are you sure you want to promote this user to Admin?')">
+                                                        Promote to Admin
+                                                    </button>
+                                                </form>
+                                            }
+
+                                            @if (!user.Role.Contains("Client"))
+                                            {
+                                                <form asp-action="DemoteToClient" method="post" class="m-0 p-0">
+                                                    <input type="hidden" name="userId" value="@user.Id" />
+                                                    <button type="button" class="btn btn-outline-warning btn-sm text-nowrap"
+                                                            onclick="showConfirmModal(this, 'Are you sure you want to demote this user to Client?')">
+                                                        Demote to Client
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -84,7 +112,7 @@
             </div>
         </div>
     </div>
-</div>
+}</div>
 
 <script>
     let formToSubmit = null;
