@@ -34,6 +34,43 @@
     </div>
 </div>
 
+<div class="container px-1 mb-3">
+    <form method="get" asp-action="Index">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-semibold small text-muted">Search</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" name="searchString" value="@ViewData["SearchString"]"
+                           class="form-control" placeholder="Search by name or SKU..." />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold small text-muted">Category</label>
+                <select name="categoryId" class="form-select" asp-items="@ViewData["CategoryId"] as SelectList">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold small text-muted">Supplier</label>
+                <select name="supplierId" class="form-select" asp-items="@ViewData["SupplierId"] as SelectList">
+                    <option value="">All Suppliers</option>
+                </select>
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-funnel me-1"></i> Filter
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary w-100">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="container px-1">
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">

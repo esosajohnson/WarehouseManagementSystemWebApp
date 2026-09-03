@@ -17,10 +17,38 @@ namespace WarehouseManagementSystem.Controllers
 
         // GET: Products
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int? categoryId, int? supplierId)
         {
-            var warehouseDbContext = _context.Products.Include(p => p.Category).Include(p => p.Location).Include(p => p.Supplier);
-            return View(await warehouseDbContext.ToListAsync());
+            var products = _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Location)
+                .Include(p => p.Supplier)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+                products = products.Where(p => p.Name.Contains(searchString) || p.Sku.Contains(searchString));
+
+            if (categoryId.HasValue)
+                products = products.Where(p => p.CategoryId == categoryId.Value);
+
+            if(supplierId.HasValue)
+                products = products.Where(p => p.SupplierId == supplierId.Value);
+
+            ViewData["CategoryId"] = new SelectList(
+                await _context.Categories.ToListAsync(),
+                "CategoryId",
+                "Name",
+                categoryId.HasValue ? categoryId.Value : (object)null);
+
+            ViewData["SupplierId"] = new SelectList(
+                await _context.Suppliers.ToListAsync(),
+                "SupplierId",
+                "Name",
+                supplierId.HasValue ? supplierId.Value : (object)null);
+
+            ViewData["SearchString"] = searchString;
+
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
