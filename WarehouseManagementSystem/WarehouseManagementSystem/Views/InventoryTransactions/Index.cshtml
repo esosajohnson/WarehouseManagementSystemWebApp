@@ -1,0 +1,88 @@
+@model IEnumerable<WarehouseManagementSystem.Models.InventoryTransaction>
+
+@{
+    ViewData["Title"] = "Inventory Transactions";
+}
+
+<div class="container">
+    <div class="row pt-4 align-items-center">
+        <div class="col">
+            <h2 class="text-primary fw-semibold text-nowrap mb-3">@ViewData["Title"]</h2>
+        </div>
+        <div class="col-auto mb-2">
+            <a asp-action="Create" class="btn btn-primary px-4 text-nowrap">
+                <i class="bi bi-plus-circle me-1"></i> New Transaction
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <p class="text-muted">View and manage inventory transactions. Add new transactions, edit existing ones, or delete them as needed.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container px-1 mt-3">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-arrow-counterclockwise display-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">No inventory transactions found.</h4>
+                    <p class="text-muted">Click the button above to add a transaction.</p>
+                    <a asp-action="Create" class="btn btn-primary px-4 mt-3">
+                        <i class="bi bi-plus-circle me-1"></i> New Transaction
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Location</th>
+                                <th>Employee</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-nowrap">@item.TransactionDate.ToString("yyyy-MM-dd")</td>
+                                    <td class="text-nowrap">@item.Product?.Name</td>
+                                    <td>@item.TransactionType</td>
+                                    <td>@item.QuantityChanged</td>
+                                    <td class="text-nowrap">@item.Location?.Name</td>
+                                    <td class="text-nowrap">@(item.Employee != null ? item.Employee.FirstName + " " + item.Employee.LastName : "-")</td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <a asp-action="Edit" asp-route-id="@item.TransactionId" class="btn btn-outline-secondary btn-sm">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </a>
+                                            <a asp-action="Details" asp-route-id="@item.TransactionId" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-eye-fill"></i> Details
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.TransactionId" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

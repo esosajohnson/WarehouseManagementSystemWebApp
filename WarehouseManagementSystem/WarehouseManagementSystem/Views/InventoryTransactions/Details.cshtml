@@ -1,0 +1,46 @@
+@model WarehouseManagementSystem.Models.InventoryTransaction
+
+@{
+    ViewData["Title"] = "Inventory Transaction Details";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 700px;">
+        <h3 class="text-primary fw-semibold mb-4">Transaction Details</h3>
+
+        <dl class="row">
+            <dt class="col-sm-4">Transaction Date</dt>
+            <dd class="col-sm-8">@Model.TransactionDate.ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-4">Product</dt>
+            <dd class="col-sm-8">@Model.Product?.Name</dd>
+
+            <dt class="col-sm-4">Type</dt>
+            <dd class="col-sm-8">@Model.TransactionType</dd>
+
+            <dt class="col-sm-4">Quantity</dt>
+            <dd class="col-sm-8">@Model.QuantityChanged</dd>
+
+            <dt class="col-sm-4">Location</dt>
+            <dd class="col-sm-8">@Model.Location?.Name</dd>
+
+            <dt class="col-sm-4">Employee</dt>
+            <dd class="col-sm-8">@(Model.Employee != null ? Model.Employee.FirstName + " " + Model.Employee.LastName : "-")</dd>
+
+            <dt class="col-sm-4">Reference Id</dt>
+            <dd class="col-sm-8">@Model.ReferenceId</dd>
+
+            <dt class="col-sm-4">Notes</dt>
+            <dd class="col-sm-8">@Model.Notes</dd>
+        </dl>
+        
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.TransactionId" class="btn btn-primary me-2 px-4">
+                <i class="bi bi-pencil-square me-1"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-secondary ms-2 px-4">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>
