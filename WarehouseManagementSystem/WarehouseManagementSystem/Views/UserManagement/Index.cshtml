@@ -10,7 +10,9 @@
             <h1 class="text-primary fw-semibold text-nowrap mb-3">User Management</h1>
         </div>
         <div class="col-auto mb-2">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary text-nowrap">Back to Home</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary text-nowrap">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to Home
+            </a>
         </div>
     </div>
     <p class="text-muted">Manage application users and their roles. Promote users to Admin or demote them to Client as needed.</p>
@@ -67,9 +69,9 @@
                                             {
                                                 <form asp-action="PromoteToAdmin" method="post" class="m-0 p-0">
                                                     <input type="hidden" name="userId" value="@user.Id" />
-                                                    <button type="button" class="btn btn-outline-success btn-sm text-nowrap"
+                                                    <button type="button" class="btn btn-success btn-sm text-nowrap"
                                                             onclick="showConfirmModal(this, 'Are you sure you want to promote this user to Admin?')">
-                                                        Promote to Admin
+                                                        <i class="bi bi-arrow-up-circle me-1"></i> Promote to Admin
                                                     </button>
                                                 </form>
                                             }
@@ -78,9 +80,9 @@
                                             {
                                                 <form asp-action="DemoteToClient" method="post" class="m-0 p-0">
                                                     <input type="hidden" name="userId" value="@user.Id" />
-                                                    <button type="button" class="btn btn-outline-warning btn-sm text-nowrap"
+                                                    <button type="button" class="btn btn-warning btn-sm text-nowrap"
                                                             onclick="showConfirmModal(this, 'Are you sure you want to demote this user to Client?')">
-                                                        Demote to Client
+                                                        <i class="bi bi-arrow-down-circle me-1"></i> Demote to Client
                                                     </button>
                                                 </form>
                                             }

@@ -120,17 +120,14 @@
                                 <td>@item.Supplier?.Name</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <a asp-action="Details" asp-route-id="@item.PurchaseOrderId"
-                                           class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-eye-fill me-1"></i> View
+                                        <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId" class="btn btn-outline-secondary btn-sm">
+                                            <i class="bi bi-pencil-square"></i> Edit
                                         </a>
-                                        <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId"
-                                           class="btn btn-sm btn-outline-secondary">
-                                            <i class="bi bi-pencil-fill me-1"></i> Edit
+                                        <a asp-action="Details" asp-route-id="@item.PurchaseOrderId" class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-eye-fill"></i> Details
                                         </a>
-                                        <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId"
-                                           class="btn btn-sm btn-outline-danger">
-                                            <i class="bi bi-trash-fill me-1"></i> Delete
+                                        <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId" class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash-fill"></i> Delete
                                         </a>
                                     </div>
                                 </td>

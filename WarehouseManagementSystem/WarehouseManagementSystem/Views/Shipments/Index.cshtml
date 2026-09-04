@@ -139,17 +139,14 @@
                                 <td>@shipment.Employee?.FullName</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <a asp-action="Details" asp-route-id="@shipment.ShipmentId"
-                                           class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-eye"></i> View
+                                        <a asp-action="Edit" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-secondary btn-sm">
+                                            <i class="bi bi-pencil-square"></i> Edit
                                         </a>
-                                        <a asp-action="Edit" asp-route-id="@shipment.ShipmentId"
-                                           class="btn btn-outline-secondary btn-sm">
-                                            <i class="bi bi-pencil"></i> Edit
+                                        <a asp-action="Details" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-eye-fill"></i> Details
                                         </a>
-                                        <a asp-action="Delete" asp-route-id="@shipment.ShipmentId"
-                                           class="btn btn-outline-danger btn-sm">
-                                            <i class="bi bi-trash"></i> Delete
+                                        <a asp-action="Delete" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash-fill"></i> Delete
                                         </a>
                                         <form asp-action="Dispatch" asp-route-id="@shipment.ShipmentId"
                                               method="post" class="m-0 p-0 d-flex">

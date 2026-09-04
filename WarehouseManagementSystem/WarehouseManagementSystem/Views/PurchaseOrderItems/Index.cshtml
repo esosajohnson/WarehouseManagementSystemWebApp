@@ -51,13 +51,13 @@
                             <td>@item.Quantity</td>
                             <td>@item.UnitCost.ToString("C")</td>
                             <td>@item.LineTotal.ToString("C")</td>
-                            <td>
+                                <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <a asp-action="Edit" asp-route-id="@item.PurchaseOrderItemId" class="btn btn-sm btn-primary me-2">
-                                        <i class="bi bi-pencil-square me-1"></i> Edit
+                                    <a asp-action="Edit" asp-route-id="@item.PurchaseOrderItemId" class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-pencil-square"></i> Edit
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@item.PurchaseOrderItemId" class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash me-1"></i> Delete
+                                    <a asp-action="Delete" asp-route-id="@item.PurchaseOrderItemId" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i> Delete
                                     </a>
                                 </div>
                             </td>
