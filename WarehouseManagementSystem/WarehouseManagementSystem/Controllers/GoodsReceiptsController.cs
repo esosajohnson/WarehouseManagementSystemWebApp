@@ -24,10 +24,33 @@ namespace WarehouseManagementSystem.Controllers
 
         // GET: GoodsReceipts
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString, int? supplierId, string? status)
         {
-            var warehouseDbContext = _context.GoodsReceipts.Include(g => g.Employee).Include(g => g.PurchaseOrder).Include(g => g.Supplier);
-            return View(await warehouseDbContext.ToListAsync());
+            var query = _context.GoodsReceipts
+                .Include(g => g.Employee)
+                .Include(g => g.PurchaseOrder)
+                .Include(g => g.Supplier)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+                query = query.Where(g => g.ReferenceNumber != null && g.ReferenceNumber.Contains(searchString));
+
+            if (supplierId.HasValue)
+                query = query.Where(g => g.SupplierId == supplierId.Value);
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                if (Enum.TryParse<GoodsReceiptStatus>(status, out var parsedStatus))
+                {
+                    query = query.Where(g => g.Status == parsedStatus);
+                }
+            }
+
+            ViewData["SearchString"] = searchString;
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", supplierId);
+            ViewData["StatusList"] = new SelectList(Enum.GetValues(typeof(GoodsReceiptStatus)).Cast<GoodsReceiptStatus>().Select(s => s.ToString()), status);
+
+            return View(await query.ToListAsync());
         }
 
         // GET: GoodsReceipts/Details/5

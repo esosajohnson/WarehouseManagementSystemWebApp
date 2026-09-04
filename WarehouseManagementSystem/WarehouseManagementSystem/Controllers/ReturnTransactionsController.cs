@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WarehouseManagementSystem.Models;
 using WarehouseManagementSystem.Services;
+using System.Linq;
+using System;
 
 namespace WarehouseManagementSystem.Controllers
 {
@@ -20,14 +22,41 @@ namespace WarehouseManagementSystem.Controllers
 
         // GET: ReturnTransactions
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? productId, string? status, int? employeeId)
         {
-            var returns = _context.ReturnTransactions
+            var query = _context.ReturnTransactions
                 .Include(r => r.Product)
                 .Include(r => r.Location)
                 .Include(r => r.Shipment)
-                .Include(r => r.ProcessedByEmployee);
-            return View(await returns.ToListAsync());
+                .Include(r => r.ProcessedByEmployee)
+                .AsQueryable();
+
+            if (productId.HasValue)
+            {
+                query = query.Where(r => r.ProductId == productId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                if (Enum.TryParse<ReturnStatus>(status, out var parsed))
+                {
+                    query = query.Where(r => r.ConditionStatus == parsed);
+                }
+            }
+
+            if (employeeId.HasValue)
+            {
+                query = query.Where(r => r.ProcessedByEmployeeId == employeeId.Value);
+            }
+
+            var products = await _context.Products.ToListAsync();
+            var employees = await _context.Employees.ToListAsync();
+
+            ViewData["ProductId"] = new SelectList(products, "ProductId", "Name", productId);
+            ViewData["StatusList"] = new SelectList(Enum.GetValues<ReturnStatus>().Cast<ReturnStatus>().Select(s => new { Value = s.ToString(), Text = s.ToString() }), "Value", "Text", status);
+            ViewData["EmployeeId"] = new SelectList(employees, "EmployeeId", "FullName", employeeId);
+
+            return View(await query.ToListAsync());
         }
 
         // GET: ReturnTransactions/Details/5

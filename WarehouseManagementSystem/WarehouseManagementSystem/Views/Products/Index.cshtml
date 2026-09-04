@@ -74,15 +74,24 @@
 <div class="container px-1">
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">
+            @{ var q = ViewContext.HttpContext.Request.Query; var hasFilters = !string.IsNullOrEmpty((string?)ViewData["SearchString"]) || !string.IsNullOrEmpty((string)q["categoryId"]) || !string.IsNullOrEmpty((string)q["supplierId"]);}
             @if (!Model.Any())
             {
                 <div class="text-center py-5">
                     <i class="bi bi-box-seam display-1 text-muted"></i>
                     <h4 class="text-muted mt-3">No products found.</h4>
-                    <p class="text-muted">Click the button above to add your first product.</p>
-                    <a asp-action="Create" class="btn btn-primary px-4 mt-3">
-                        <i class="bi bi-plus-circle me-1"></i> Add New Product
-                    </a>
+                    @if (hasFilters)
+                    {
+                        <p class="text-muted">No products match the current filters.</p>
+                        <a asp-action="Index" class="btn btn-outline-secondary mt-3">Clear filters</a>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Click the button above to add your first product.</p>
+                        <a asp-action="Create" class="btn btn-primary px-4 mt-3">
+                            <i class="bi bi-plus-circle me-1"></i> Add New Product
+                        </a>
+                    }
                 </div>
             }
             else

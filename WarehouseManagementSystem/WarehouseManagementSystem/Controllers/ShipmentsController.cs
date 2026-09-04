@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.Models;
 using WarehouseManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
+using System;
 
 namespace WarehouseManagementSystem.Controllers
 {
@@ -21,11 +23,29 @@ namespace WarehouseManagementSystem.Controllers
 
         // GET: Shipments
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString, string? status)
         {
-            return View(await _context.Shipments
+            var query = _context.Shipments
                 .Include(s => s.Employee)
-                .ToListAsync());
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(s => s.TrackingNumber != null && s.TrackingNumber.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                if (Enum.TryParse<ShipmentStatus>(status, out var parsed))
+                {
+                    query = query.Where(s => s.Status == parsed);
+                }
+            }
+
+            ViewData["SearchString"] = searchString;
+            ViewData["StatusList"] = new SelectList(Enum.GetValues<ShipmentStatus>().Select(s => new { Value = s.ToString(), Text = s.ToString() }), "Value", "Text", status);
+
+            return View(await query.ToListAsync());
         }
 
         // GET: Shipments/Details/5

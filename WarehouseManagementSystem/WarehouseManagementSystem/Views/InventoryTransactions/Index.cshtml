@@ -26,17 +26,60 @@
 </div>
 
 <div class="container px-1 mt-3">
+    <div class="container px-1 mb-3">
+        <form method="get" asp-action="Index">
+            <div class="row g-2 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold small text-muted">Type</label>
+                    <select name="transactionType" class="form-select" asp-items="@(ViewData["TransactionTypeList"] as SelectList)">
+                        <option value="">All Types</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold small text-muted">Product</label>
+                    <select name="productId" class="form-select" asp-items="@(ViewData["ProductId"] as SelectList)">
+                        <option value="">All Products</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold small text-muted">From</label>
+                    <input type="date" name="dateFrom" class="form-control" value="@(ViewData["DateFrom"] ?? String.Empty)" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold small text-muted">To</label>
+                    <input type="date" name="dateTo" class="form-control" value="@(ViewData["DateTo"] ?? String.Empty)" />
+                </div>
+                <div class="col-12 mt-2 d-flex gap-2 justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-funnel me-1"></i> Filter
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">
+            @{ var q = ViewContext.HttpContext.Request.Query; var hasFilters = !string.IsNullOrEmpty((string)q["transactionType"]) || !string.IsNullOrEmpty((string)q["productId"]) || !string.IsNullOrEmpty((string)q["dateFrom"]) || !string.IsNullOrEmpty((string)q["dateTo"]); }
             @if (!Model.Any())
             {
                 <div class="text-center py-5">
                     <i class="bi bi-arrow-counterclockwise display-1 text-muted"></i>
                     <h4 class="text-muted mt-3">No inventory transactions found.</h4>
-                    <p class="text-muted">Click the button above to add a transaction.</p>
-                    <a asp-action="Create" class="btn btn-primary px-4 mt-3">
-                        <i class="bi bi-plus-circle me-1"></i> New Transaction
-                    </a>
+                    @if (hasFilters)
+                    {
+                        <p class="text-muted">No inventory transactions match the current filters.</p>
+                        <a asp-action="Index" class="btn btn-outline-secondary mt-3">Clear filters</a>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Click the button above to add a transaction.</p>
+                        <a asp-action="Create" class="btn btn-primary px-4 mt-3">
+                            <i class="bi bi-plus-circle me-1"></i> New Transaction
+                        </a>
+                    }
                 </div>
             }
             else

@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +19,50 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: InventoryTransactions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? transactionType, int? productId, DateTime? dateFrom, DateTime? dateTo)
         {
-            var transactions = _context.InventoryTransactions
+            var query = _context.InventoryTransactions
                 .Include(t => t.Product)
+                .Include(t => t.Employee)
                 .Include(t => t.Location)
-                .Include(t => t.Employee);
+                .AsQueryable();
 
-            return View(await transactions.ToListAsync());
+            if (!string.IsNullOrEmpty(transactionType))
+            {
+                query = query.Where(t => t.TransactionType == transactionType);
+            }
+
+            if (productId.HasValue)
+            {
+                query = query.Where(t => t.ProductId == productId.Value);
+            }
+
+            if (dateFrom.HasValue)
+            {
+                var fromDate = dateFrom.Value.Date;
+                query = query.Where(t => t.TransactionDate.Date >= fromDate);
+            }
+
+            if (dateTo.HasValue)
+            {
+                var toDate = dateTo.Value.Date;
+                query = query.Where(t => t.TransactionDate.Date <= toDate);
+            }
+
+            query = query.OrderByDescending(t => t.TransactionDate);
+
+            // Populate ViewData for filters
+            ViewData["TransactionType"] = transactionType;
+            var types = new List<string> { "Inbound", "Outbound", "Return", "Return Write-Off" };
+            ViewData["TransactionTypeList"] = new SelectList(types.Select(s => new { Value = s, Text = s }), "Value", "Text", transactionType);
+
+            var products = await _context.Products.ToListAsync();
+            ViewData["ProductId"] = new SelectList(products, "ProductId", "Name", productId);
+
+            ViewData["DateFrom"] = dateFrom?.ToString("yyyy-MM-dd");
+            ViewData["DateTo"] = dateTo?.ToString("yyyy-MM-dd");
+
+            return View(await query.ToListAsync());
         }
 
         // GET: InventoryTransactions/Details/5

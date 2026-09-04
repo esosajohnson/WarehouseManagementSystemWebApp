@@ -20,10 +20,36 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: PurchaseOrders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString, int? supplierId, string? status)
         {
-            var warehouseDbContext = _context.PurchaseOrders.Include(p => p.Supplier);
-            return View(await warehouseDbContext.ToListAsync());
+            var query = _context.PurchaseOrders
+                .Include(p => p.Supplier)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => p.PurchaseOrderId.ToString().Contains(searchString) || (p.Supplier != null && p.Supplier.Name.Contains(searchString)));
+            }
+
+            if (supplierId.HasValue)
+            {
+                query = query.Where(p => p.SupplierId == supplierId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                if (Enum.TryParse<PurchaseOrderStatus>(status, out var parsedStatus))
+                {
+                    query = query.Where(p => p.OrderStatus == parsedStatus);
+                }
+            }
+
+            ViewData["SearchString"] = searchString;
+            var suppliers = await _context.Suppliers.ToListAsync();
+            ViewData["SupplierId"] = new SelectList(suppliers, "SupplierId", "Name", supplierId);
+            ViewData["StatusList"] = new SelectList(Enum.GetValues<PurchaseOrderStatus>().Cast<PurchaseOrderStatus>().Select(s => new { Value = s.ToString(), Text = s.ToString() }), "Value", "Text", status);
+
+            return View(await query.ToListAsync());
         }
 
         // GET: PurchaseOrders/Details/5

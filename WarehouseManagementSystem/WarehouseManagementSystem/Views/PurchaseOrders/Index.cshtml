@@ -35,18 +35,64 @@
     </div>
 </div>
 
+<div class="container px-1 mb-3">
+    <form method="get" asp-action="Index">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label fw-semibold small text-muted">Search</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" name="searchString" value="@ViewData["SearchString"]"
+                           class="form-control" placeholder="Search by PO number or supplier..." />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold small text-muted">Supplier</label>
+                <select name="supplierId" class="form-select" asp-items="@(ViewData["SupplierId"] as SelectList)">
+                    <option value="">All Suppliers</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-semibold small text-muted">Status</label>
+                <select name="status" class="form-select" asp-items="@(ViewData["StatusList"] as SelectList)">
+                    <option value="">All Statuses</option>
+                </select>
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-funnel me-1"></i> Filter
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary w-100">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="container px-1">
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">
+            @{ var q = ViewContext.HttpContext.Request.Query; var hasFilters = !string.IsNullOrEmpty((string?)ViewData["SearchString"]) || !string.IsNullOrEmpty((string)q["supplierId"]) || !string.IsNullOrEmpty((string)q["status"]); }
             @if (!Model.Any())
             {
                 <div class="text-center py-5">
                     <i class="bi bi-file-earmark-text display-4 text-muted mb-3"></i>
                     <h4 class="text-muted">No Purchase Orders Found</h4>
-                    <p class="text-muted">Click the button above to create your first purchase order.</p>
-                    <a asp-action="Create" class="btn btn-primary mt-3">
-                        <i class="bi bi-plus-circle me-1"></i> Create Purchase Order
-                    </a>
+                    @if (hasFilters)
+                    {
+                        <p class="text-muted">No purchase orders match the current filters.</p>
+                        <a asp-action="Index" class="btn btn-outline-secondary mt-3">Clear filters</a>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Click the button above to create your first purchase order.</p>
+                        <a asp-action="Create" class="btn btn-primary mt-3">
+                            <i class="bi bi-plus-circle me-1"></i> Create Purchase Order
+                        </a>
+                    }
                 </div>
             }
             else
