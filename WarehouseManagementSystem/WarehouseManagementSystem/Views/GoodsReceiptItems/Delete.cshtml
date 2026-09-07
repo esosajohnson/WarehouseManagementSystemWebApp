@@ -4,9 +4,18 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="alert alert-danger mx-auto" role="alert" style="max-width: 700px;">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    This action cannot be undone. Deleting this goods receipt item will permanently remove it from the system.
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 700px;">
+        <div class="card-body p-0">
+
+<h1 class="text-danger fw-bold">Delete</h1>
+
+<h3 class="text-dark">Are you sure you want to delete this?</h3>
 <div>
     <h4>GoodsReceiptItem</h4>
     <hr />
@@ -54,4 +63,8 @@
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
+</div>
+
+        </div>
+    </div>
 </div>
