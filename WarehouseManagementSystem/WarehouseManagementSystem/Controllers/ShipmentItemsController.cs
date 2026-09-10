@@ -43,10 +43,14 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: ShipmentItems/Create
-        public IActionResult Create()
+        public IActionResult Create(int? shipmentId = null)
         {
             PopulateDropDowns();
-            return View();
+            var item = new ShipmentItem
+            {
+                ShipmentId = shipmentId ?? 0
+            };
+            return View(item);
         }
 
         // POST: ShipmentItems/Create

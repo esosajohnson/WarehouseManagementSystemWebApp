@@ -110,7 +110,7 @@
                                 <td>@shipment.TrackingNumber</td>
                                 <td>@shipment.Carrier</td>
                                 <td>@shipment.Destination</td>
-                                <td>@shipment.ShippingDate</td>
+                                <td>@shipment.ShippingDate.ToShortDateString()</td>
                                 <td>
                                     @switch (shipment.Status)
                                     {

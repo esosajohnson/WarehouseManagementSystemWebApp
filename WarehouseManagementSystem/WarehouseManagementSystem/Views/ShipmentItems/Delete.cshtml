@@ -19,9 +19,9 @@
             <dt class="col-sm-4">Quantity Shipped</dt>
             <dd class="col-sm-8">@Model.QuantityShipped</dd>
             <dt class="col-sm-4">Unit Price</dt>
-            <dd class="col-sm-8">@Model.UnitPrice?.ToString("C2") ?? "—"</dd>
+            <dd class="col-sm-8">@(Model.UnitPrice?.ToString("C2") ?? "—")</dd>
             <dt class="col-sm-4">Line Total</dt>
-            <dd class="col-sm-8">@Model.LineTotal?.ToString("C2") ?? "—"</dd>
+            <dd class="col-sm-8">@(Model.LineTotal?.ToString("C2") ?? "—")</dd>
         </dl>
 
         <form asp-action="Delete" method="post" class="d-inline">

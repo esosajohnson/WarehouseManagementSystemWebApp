@@ -6,6 +6,6 @@
         Approved,
         PartiallyReceived,
         Received,
-        Canceled,
+        Cancelled,
     }
 }

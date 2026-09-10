@@ -58,6 +58,10 @@ namespace WarehouseManagementSystem.Controllers
 
             var shipment = await _context.Shipments
                 .Include(s => s.Employee)
+                .Include(s => s.ShipmentItems)
+                    .ThenInclude(i => i.Product)
+                .Include(s => s.ShipmentItems)
+                    .ThenInclude(i => i.Location)
                 .FirstOrDefaultAsync(m => m.ShipmentId == id);
 
             if (shipment == null)
