@@ -47,12 +47,17 @@ namespace WarehouseManagementSystem.Controllers
         }
 
         // GET: GoodsReceiptItems/Create
-        public IActionResult Create()
+        public IActionResult Create(int? goodsReceiptId = null)
         {
             ViewData["GoodsReceiptId"] = new SelectList(_context.GoodsReceipts, "GoodsReceiptId", "GoodsReceiptId");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "Name");
-            return View();
+
+            var item = new GoodsReceiptItem
+            {
+                GoodsReceiptId = goodsReceiptId ?? 0
+            };
+            return View(item);
         }
 
         // POST: GoodsReceiptItems/Create

@@ -1,65 +1,85 @@
 ﻿@model IEnumerable<WarehouseManagementSystem.Models.GoodsReceiptItem>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Goods Receipt Items";
 }
 
-<h1>Index</h1>
+<div class="container">
+    <div class="row pt-4 align-items-center">
+        <div class="col">
+            <h2 class="text-primary fw-semibold text-nowrap mb-3">@ViewData["Title"]</h2>
+        </div>
+        <div class="col-auto mb-2">
+            <a asp-controller="GoodsReceipts" asp-action="Index" class="btn btn-primary px-4 text-nowrap">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to Receipts
+            </a>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <p class="text-muted">Manage goods receipt items. You can add, edit, view details, or delete items received against goods receipts.</p>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityReceived)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpiryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GoodsReceipt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityReceived)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpiryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoodsReceipt.GoodsReceiptId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.LocationId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.GoodsReceiptItemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GoodsReceiptItemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GoodsReceiptItemId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container px-1">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-box-seam display-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">No goods receipt items found.</h4>
+                    <p class="text-muted">Click the button above to add a goods receipt item.</p>
+                    <a asp-action="Create" class="btn btn-primary px-4 mt-3">
+                        <i class="bi bi-plus-circle me-1"></i> Add Item
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Quantity Received</th>
+                                <th>Expiry Date</th>
+                                <th>Notes</th>
+                                <th>Goods Receipt</th>
+                                <th>Location</th>
+                                <th>Product</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.QuantityReceived</td>
+                                    <td class="text-nowrap">@((item.ExpiryDate.HasValue) ? item.ExpiryDate.Value.ToString("yyyy-MM-dd") : "-")</td>
+                                    <td>@(item.Notes ?? "-")</td>
+                                    <td>@item.GoodsReceipt?.GoodsReceiptId</td>
+                                    <td>@item.Location?.Name</td>
+                                    <td>@item.Product?.Name</td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <a asp-action="Edit" asp-route-id="@item.GoodsReceiptItemId" class="btn btn-outline-secondary btn-sm">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </a>
+                                            <a asp-action="Details" asp-route-id="@item.GoodsReceiptItemId" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-eye-fill"></i> Details
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.GoodsReceiptItemId" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

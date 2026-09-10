@@ -1,53 +1,72 @@
 ﻿@model WarehouseManagementSystem.Models.GoodsReceiptItem
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Goods Receipt Item";
 }
 
-<h1>Create</h1>
+<div class="container py-5">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 800px;">
 
-<h4>GoodsReceiptItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        <h2 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h2>
+        <p class="text-muted">Adding item to Goods Receipt #@Model?.GoodsReceiptId</p>
+
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="GoodsReceiptId" class="control-label"></label>
-                <select asp-for="GoodsReceiptId" class ="form-control" asp-items="ViewBag.GoodsReceiptId"></select>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="GoodsReceiptId" class="form-label fw-semibold">Goods Receipt</label>
+                <select asp-for="GoodsReceiptId" class="form-select" asp-items="ViewBag.GoodsReceiptId"></select>
+                <span asp-validation-for="GoodsReceiptId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <select asp-for="ProductId" class ="form-control" asp-items="ViewBag.ProductId"></select>
+
+            <div class="mb-3">
+                <label asp-for="ProductId" class="form-label fw-semibold">Product</label>
+                <select asp-for="ProductId" class="form-select" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="QuantityReceived" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="QuantityReceived" class="form-label fw-semibold">Quantity Received</label>
                 <input asp-for="QuantityReceived" class="form-control" />
                 <span asp-validation-for="QuantityReceived" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LocationId" class="control-label"></label>
-                <select asp-for="LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
+
+            <div class="mb-3">
+                <label asp-for="LocationId" class="form-label fw-semibold">Location</label>
+                <select asp-for="LocationId" class="form-select" asp-items="ViewBag.LocationId"></select>
+                <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ExpiryDate" class="control-label"></label>
-                <input asp-for="ExpiryDate" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="ExpiryDate" class="form-label fw-semibold">Expiry Date</label>
+                <input asp-for="ExpiryDate" type="date" class="form-control" />
                 <span asp-validation-for="ExpiryDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label fw-semibold">Notes</label>
                 <input asp-for="Notes" class="form-control" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> Add Item
+                </button>
+                <button type="reset" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Cancel
+                </a>
+                <a asp-controller="GoodsReceipts" asp-action="Details" 
+                    asp-route-id="@Model?.GoodsReceiptId" 
+                    class="btn btn-secondary ms-auto px-4">
+                    <i class="bi bi-arrow-left-circle me-1"></i> Back to Receipt Details
+                </a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
