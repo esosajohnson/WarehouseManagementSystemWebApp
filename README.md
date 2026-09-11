@@ -15,6 +15,16 @@ dedicated service layer.
 
 ---
 
+## Live Demo
+
+🌐 **[https://wms.esosajohnson.dev](https://wms.esosajohnson.dev)**
+
+Demo credentials:
+- **Email:** `demo@wms.com`
+- **Password:** `Demo1234!`
+
+---
+
 ## Features
 
 ### Inventory Management
@@ -67,6 +77,7 @@ dedicated service layer.
 | Frontend | Razor Views, Bootstrap 5, Bootstrap Icons, Chart.js |
 | Auth | ASP.NET Core Identity |
 | Tools | Visual Studio, Git, GitHub, SSMS |
+| Deployment | Azure App Service, GitHub Actions, Cloudflare |
 
 ---
 
@@ -151,7 +162,6 @@ dotnet run
 - Real-time notifications via SignalR
 - Full audit logging (who changed what and when)
 - Unit and integration tests
-- Azure deployment
 
 ---
 
@@ -166,6 +176,9 @@ dotnet run
 - Role-based authentication and authorisation with ASP.NET Core Identity
 - Bootstrap 5 responsive UI design
 - Debugging complex multi-layer application issues
+- Azure App Service deployment and configuration
+- CI/CD pipeline setup with GitHub Actions
+- Custom domain configuration with Cloudflare
 
 ---
 
