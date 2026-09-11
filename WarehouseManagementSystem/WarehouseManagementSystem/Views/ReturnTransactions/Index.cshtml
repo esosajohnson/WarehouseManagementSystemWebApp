@@ -17,6 +17,14 @@
     </div>
 </div>
 
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-12">
+            <p class="text-muted">Manage your return transactions efficiently using the options below.</p>
+        </div>
+    </div>
+</div>
+
 <div class="container px-1 mt-3">
     <div class="container px-1 mb-3">
         <form method="get" asp-action="Index">
@@ -78,7 +86,7 @@
                     <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Return Date</th>
+                            <th class="text-nowrap">Return Date</th>
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Condition</th>
@@ -90,8 +98,8 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.ReturnDate.ToString("yyyy-MM-dd")</td>
-                                <td>@item.Product?.Name</td>
+                                <td class="text-nowrap">@item.ReturnDate.ToString("yyyy-MM-dd")</td>
+                                <td class="text-nowrap">@item.Product?.Name</td>
                                 <td>@item.Quantity</td>
                                 <td>
                                     @switch (item.ConditionStatus)
@@ -103,26 +111,26 @@
                                             <span class="badge-soft-success">Restocked</span>
                                             break;
                                         case ReturnStatus.WrittenOff:
-                                            <span class="badge-soft-danger">Written Off</span>
+                                            <span class="badge-soft-danger text-nowrap">Written Off</span>
                                             break;
                                     }
                                 </td>
-                                <td>@(item.ProcessedByEmployee != null ? item.ProcessedByEmployee.FirstName + " " + item.ProcessedByEmployee.LastName : "-")</td>
+                                <td class="text-nowrap">@(item.ProcessedByEmployee != null ? item.ProcessedByEmployee.FirstName + " " + item.ProcessedByEmployee.LastName : "-")</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <a asp-action="Edit" asp-route-id="@item.ReturnTransactionId" class="btn btn-outline-secondary btn-sm">
+                                        <a asp-action="Edit" asp-route-id="@item.ReturnTransactionId" class="btn btn-outline-secondary btn-sm text-nowrap">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
-                                        <a asp-action="Details" asp-route-id="@item.ReturnTransactionId" class="btn btn-outline-primary btn-sm">
+                                        <a asp-action="Details" asp-route-id="@item.ReturnTransactionId" class="btn btn-outline-primary btn-sm text-nowrap">
                                             <i class="bi bi-eye-fill"></i> Details
                                         </a>
-                                        <a asp-action="Delete" asp-route-id="@item.ReturnTransactionId" class="btn btn-outline-danger btn-sm">
+                                        <a asp-action="Delete" asp-route-id="@item.ReturnTransactionId" class="btn btn-outline-danger btn-sm text-nowrap">
                                             <i class="bi bi-trash-fill"></i> Delete
                                         </a>
                                         <form asp-action="Restock" asp-route-id="@item.ReturnTransactionId"
                                               method="post" class="m-0 p-0 d-flex">
                                             @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-success btn-sm"
+                                            <button type="submit" class="btn btn-success btn-sm text-nowrap"
                                                 @(item.ConditionStatus != ReturnStatus.Pending ? "disabled" : "")>
                                                 <i class="bi bi-arrow-counterclockwise me-1"></i> Restock
                                             </button>
@@ -130,7 +138,7 @@
                                         <form asp-action="WriteOff" asp-route-id="@item.ReturnTransactionId"
                                               method="post" class="m-0 p-0 d-flex">
                                             @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-warning btn-sm"
+                                            <button type="submit" class="btn btn-warning btn-sm text-nowrap"
                                                 @(item.ConditionStatus != ReturnStatus.Pending ? "disabled" : "")>
                                                 <i class="bi bi-x-circle me-1"></i> Write Off
                                             </button>

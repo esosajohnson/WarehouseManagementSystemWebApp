@@ -94,13 +94,13 @@
                     <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">Tracking Number</th>
-                            <th scope="col">Carrier</th>
-                            <th scope="col">Destination</th>
-                            <th scope="col">Shipping Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Actions</th>
+                            <th class="text-nowrap">Tracking Number</th>
+                            <th>Carrier</th>
+                            <th>Destination</th>
+                            <th class="text-nowrap">Shipping Date</th>
+                            <th>Status</th>
+                            <th>Employee</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,7 +108,7 @@
                         {
                             <tr>
                                 <td>@shipment.TrackingNumber</td>
-                                <td>@shipment.Carrier</td>
+                                <td class="text-nowrap">@shipment.Carrier</td>
                                 <td>@shipment.Destination</td>
                                 <td>@shipment.ShippingDate.ToShortDateString()</td>
                                 <td>
@@ -136,22 +136,22 @@
                                             break;
                                     }
                                 </td>
-                                <td>@shipment.Employee?.FullName</td>
+                                <td class="text-nowrap">@shipment.Employee?.FullName</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <a asp-action="Edit" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-secondary btn-sm">
+                                        <a asp-action="Edit" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-secondary btn-sm text-nowrap">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
-                                        <a asp-action="Details" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-primary btn-sm">
+                                        <a asp-action="Details" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-primary btn-sm text-nowrap">
                                             <i class="bi bi-eye-fill"></i> Details
                                         </a>
-                                        <a asp-action="Delete" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-danger btn-sm">
+                                        <a asp-action="Delete" asp-route-id="@shipment.ShipmentId" class="btn btn-outline-danger btn-sm text-nowrap">
                                             <i class="bi bi-trash-fill"></i> Delete
                                         </a>
                                         <form asp-action="Dispatch" asp-route-id="@shipment.ShipmentId"
                                               method="post" class="m-0 p-0 d-flex">
                                             @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-success btn-sm"
+                                            <button type="submit" class="btn btn-success btn-sm text-nowrap"
                                                 @(shipment.Status == ShipmentStatus.Dispatched ? "disabled" : "")>
                                                 <i class="bi bi-send-fill me-1"></i> Dispatch
                                             </button>

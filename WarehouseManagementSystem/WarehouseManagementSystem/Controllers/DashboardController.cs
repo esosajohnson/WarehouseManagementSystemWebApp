@@ -24,10 +24,10 @@ namespace WarehouseManagementSystem.Controllers
                          && t.TransactionDate.Date == DateTime.UtcNow.Date)
                 .SumAsync(t => (int?)t.QuantityChanged) ?? 0;
 
-            ViewData["OutboundToday"] = await _context.InventoryTransactions
+            ViewData["OutboundToday"] = Math.Abs(await _context.InventoryTransactions
                 .Where(t => t.TransactionType == "Outbound"
                          && t.TransactionDate.Date == DateTime.UtcNow.Date)
-                .SumAsync(t => (int?)t.QuantityChanged) ?? 0;
+                .SumAsync(t => (int?)t.QuantityChanged) ?? 0);
 
             ViewData["OpenPurchaseOrders"] = await _context.PurchaseOrders
                 .Where(p => p.OrderStatus == PurchaseOrderStatus.Approved
