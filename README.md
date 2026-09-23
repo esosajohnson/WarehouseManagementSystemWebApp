@@ -103,23 +103,25 @@ The system uses a relational SQL Server database. Key entities:
 
 `Products` · `Categories` · `Suppliers` · `Employees` · `Locations` · 
 `StockLevels` · `PurchaseOrders` · `PurchaseOrderItems` · `GoodsReceipts` · 
-`GoodsReceiptItems` · `Shipments` · `ShipmentItems` · `ReturnTransactions` · 
+`GoodsReceiptItems` · `Shipments` · `ShipmentItems` · `ReturnTransactions` · `InventoryTransactions`
 
 ---
 
 ### Core Warehouse Flow
+
+```
 Supplier → Purchase Order (Approved)
-→ Goods Receipt → InboundService
-→ StockLevels++, InventoryTransaction logged
+        → Goods Receipt → InboundService
+        → StockLevels++, InventoryTransaction logged
 
 Customer Order → Shipment (Pending)
-→ Dispatch → OutboundService
-→ StockLevels--, InventoryTransaction logged
+              → Dispatch → OutboundService
+              → StockLevels--, InventoryTransaction logged
 
 Return → ReturnService
-→ Restock: StockLevels++, InventoryTransaction logged
-→ Write-Off: InventoryTransaction logged, no stock change
-
+      → Restock: StockLevels++, InventoryTransaction logged
+      → Write-Off: InventoryTransaction logged, no stock change
+```
 ---
 
 ## Getting Started
